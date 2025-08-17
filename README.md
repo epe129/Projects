@@ -1,8 +1,8 @@
 # This contains many mini projects
 
-flask-json
+# flask-json
  Flask app that returns JSON data have log in and sign in
-fontti
+# fontti
  You can see many different font styles
-nappi
+# nappi
  button that changes the place when you put the mouse over it
