@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create account</title>
+    <title>Sing in</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="main">
-        <form action="{{ url_for("home")}}" method="post" class="form">
-            <h1>Create account</h1>
+        <form action="{{ url_for("Singin")}}" method="post" class="form">
+            <h1>Sing in</h1>
             <input name="Username" placeholder="Username">
             <input type="password" name="Password" placeholder="Password">       
-            <p>UserID <span style="font-size: 1rem; font-weight: 900;">{{ id }}</span> | Remember your user id!</p>
+            <input type="number" max="100" name="UserID" placeholder="UserID">
             <button type="submit">Submit</button> 
         </form>
         <br>
-        <a href="{{ url_for('Singin') }}">Sing in</a>
+        <a href="{{ url_for('home') }}">Create account</a>
     </div>
 </body>
 </html>
