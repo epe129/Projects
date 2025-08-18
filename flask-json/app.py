@@ -1,10 +1,12 @@
 # this is test project i don't care if you see the data 
 
 from flask import Flask, render_template, request
+from flask_bcrypt import Bcrypt
 import json
 import random
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 @app.route('/page')
 def page(Username2):
@@ -15,10 +17,16 @@ def home():
     id = random.randint(1, 100)
     Username = ""
     Password = ""
+    hashed_password = ""
 
     if request.method == "POST":
         Username = request.form.get("Username")
         Password = request.form.get("Password")
+
+        if Password != "" and Password is not None:
+            hashed_password = bcrypt.generate_password_hash(Password).decode('utf-8')
+            
+            print(hashed_password)
     
     if Username == "" or Password == "":
         pass
@@ -26,7 +34,7 @@ def home():
         tunnus = {
             "id": f"{id}",
             "Username": f"{Username}",
-            "Password": f"{Password}",
+            "Password": f"{hashed_password}",
         }
 
         with open("json.json", "r+") as f:
@@ -40,6 +48,8 @@ def home():
         tunnus.clear()
         Username = ""
         Password = ""
+        hashed_password = ""
+
     return render_template("index.html", id=id)
 
 @app.route('/Singin', methods =["GET", "POST"])
@@ -58,8 +68,10 @@ def Singin():
                     getid = d["id"]
                     getusername = d["Username"]
                     getpassword = d["Password"]
+
+                    oikeia = bcrypt.check_password_hash(getpassword, Password2)
                    
-                    if UserID2 == getid and Username2 == getusername and Password2 == getpassword:
+                    if UserID2 == getid and Username2 == getusername and oikeia == True:
                         print("True")
                         return page(Username2)
                     else:
