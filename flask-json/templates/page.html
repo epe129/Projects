@@ -14,12 +14,41 @@
             width: 100%;
             height: 100%;
         }
+        
+        .otsikko {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            width: 50%;
+            height: 100%;
+        }
+
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Welcome {{ Username }}</h1>
+    <div class="otsikko">
+        <h1 class="h1" style="text-align: center;"><span id="teksti"></span> {{ Username }}</h1>
+        <p style="font-size: 0.8rem; float: left; margin-left: 1.2rem;">Sinun UserID: {{ UserID2 }}</p>   
+    </div>
+
     <div class="main" id="main">
         
     </div>
+    
+    <script>
+        const aika = new Date();
+        const tunti = aika.getHours();
+        let teksti = "";
+        console.log(tunti)
+        if (tunti < 12) {
+            teksti = "Hyvää huomenta"
+        } else if (tunti > 12 && tunti < 18) {
+            teksti = "Hyvää iltapäivää"
+        } else if (tunti > 18 && tunti < 22) {
+            teksti = "Hyvää iltaa"
+        }
+        document.getElementById("teksti").innerHTML = teksti;
+    </script>
 </body>
 </html>

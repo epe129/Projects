@@ -1,5 +1,3 @@
-# this is test project i don't care if you see the data 
-
 from flask import Flask, render_template, request
 from flask_bcrypt import Bcrypt
 import json
@@ -9,25 +7,24 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 @app.route('/page')
-def page(Username2):
-    return render_template("page.html", Username=Username2)
+def page(Username2, UserID2):
+    return render_template("page.html", Username=Username2, UserID2=UserID2)
 
 @app.route('/', methods =["GET", "POST"])
 def home():
+    # todo korjaa id tee se javacsriptillä!!
     id = random.randint(1, 100)
     Username = ""
     Password = ""
     hashed_password = ""
-
+    
     if request.method == "POST":
-        Username = request.form.get("Username")
+        Username = request.form.get("Username").capitalize()
         Password = request.form.get("Password")
 
         if Password != "" and Password is not None:
             hashed_password = bcrypt.generate_password_hash(Password).decode('utf-8')
-            
-            print(hashed_password)
-    
+
     if Username == "" or Password == "":
         pass
     else:
@@ -36,30 +33,35 @@ def home():
             "Username": f"{Username}",
             "Password": f"{hashed_password}",
         }
-
         with open("json.json", "r+") as f:
             file_data = json.load(f)
-                
-            file_data["tiedot"].append(tunnus)
-                
-            f.seek(0)
-                
-            json.dump(file_data, f, indent=4)
-        tunnus.clear()
-        Username = ""
-        Password = ""
-        hashed_password = ""
+            for key, value in file_data.items():
+                for nimi in value:
+                    if Username == nimi["Username"]:
+                        tunnus.clear()
+                        Username = ""
+                        Password = ""
+                        hashed_password = ""
+            if Username == "" and Password == "":
+                pass
+            else:
+                file_data["tiedot"].append(tunnus)
+                    
+                f.seek(0)
+                    
+                json.dump(file_data, f, indent=4)
+       
 
-    return render_template("index.html", id=id)
+    return render_template("create.html", id=id)
 
 @app.route('/Singin', methods =["GET", "POST"])
 def Singin():
     
     if request.method == "POST":
-        Username2 = request.form.get("Username")
+        Username2 = request.form.get("Username").capitalize()
         Password2 = request.form.get("Password")
         UserID2 = request.form.get("UserID")
-        # print(Username, Password, UserID)
+
         with open("json.json", "r") as tiedosto:
             data = tiedosto.read()
             tiedot = json.loads(data)
@@ -73,7 +75,7 @@ def Singin():
                    
                     if UserID2 == getid and Username2 == getusername and oikeia == True:
                         print("True")
-                        return page(Username2)
+                        return page(Username2, UserID2)
                     else:
                         print("väärin")
                     Username2 = ""
@@ -81,6 +83,9 @@ def Singin():
                     UserID2 = ""
     return render_template("Singin.html")
 
+@app.route('/admin', methods =["GET", "POST"])
+def admin():
+    return render_template("admin.html")
 
 if __name__ == '__main__':
      app.run()
