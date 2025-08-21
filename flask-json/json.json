@@ -4,6 +4,11 @@
             "id": "86",
             "Username": "Lenni",
             "Password": "$2b$12$9MiUEd.VYxQ3vUY9UP.znubWF6h1gnVtkq7Rm2.UMgObHe8Zm40MW"
+        },
+        {
+            "id": "69",
+            "Username": "Admin ",
+            "Password": "$2b$12$VC3d04MiGT3QTOP0fFTXH.LPpDvzyiTjXACMjvp6FGq/PO9NcFQsu"
         }
     ]
 }

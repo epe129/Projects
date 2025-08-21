@@ -7,19 +7,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <!-- Here you can create account -->
     <div class="main">
         <form action="{{ url_for("home")}}" method="post" class="form">
             <h1>Create account</h1>
-            <input name="Username" placeholder="Username">
-            <input type="password" name="Password" placeholder="Password">       
-            <p>UserID <span style="font-size: 1rem; font-weight: 900;">{{ id }}</span> | Remember your user id!</p>
+            <input name="Username" placeholder="Username" required>
+            <input type="password" name="Password" placeholder="Password" required>       
+            <p>Type your UserID <input style="padding: 3px; margin: 0; width: 40px;" type="number" min="1" max="1000" name="id" id="id" required></input> and Remember That!</p>
             <button type="submit">Submit</button> 
         </form>
         <br>
-        <a class="a" href="{{ url_for('Singin') }}">Sing in</a>
+        <a class="a" href="{{ url_for('Signin') }}">Sing in</a>
     </div>
-    <script>
-        
-    </script>
 </body>
 </html>

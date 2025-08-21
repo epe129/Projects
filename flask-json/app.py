@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 from flask_bcrypt import Bcrypt
 import json
-import random
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -12,8 +11,6 @@ def page(Username2, UserID2):
 
 @app.route('/', methods =["GET", "POST"])
 def home():
-    # todo korjaa id tee se javacsriptillä!!
-    id = random.randint(1, 100)
     Username = ""
     Password = ""
     hashed_password = ""
@@ -21,6 +18,7 @@ def home():
     if request.method == "POST":
         Username = request.form.get("Username").capitalize()
         Password = request.form.get("Password")
+        id = request.form.get("id")
 
         if Password != "" and Password is not None:
             hashed_password = bcrypt.generate_password_hash(Password).decode('utf-8')
@@ -52,10 +50,10 @@ def home():
                 json.dump(file_data, f, indent=4)
        
 
-    return render_template("create.html", id=id)
+    return render_template("create.html")
 
-@app.route('/Singin', methods =["GET", "POST"])
-def Singin():
+@app.route('/Signin', methods =["GET", "POST"])
+def Signin():
     
     if request.method == "POST":
         Username2 = request.form.get("Username").capitalize()
@@ -74,14 +72,13 @@ def Singin():
                     oikeia = bcrypt.check_password_hash(getpassword, Password2)
                    
                     if UserID2 == getid and Username2 == getusername and oikeia == True:
-                        print("True")
                         return page(Username2, UserID2)
                     else:
                         print("väärin")
                     Username2 = ""
                     Password2 = ""
                     UserID2 = ""
-    return render_template("Singin.html")
+    return render_template("Signin.html")
 
 @app.route('/admin', methods =["GET", "POST"])
 def admin():
