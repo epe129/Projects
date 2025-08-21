@@ -80,6 +80,7 @@ def Signin():
                     UserID2 = ""
     return render_template("Signin.html")
 
+# I haven't started doing this yet.
 @app.route('/admin', methods =["GET", "POST"])
 def admin():
     return render_template("admin.html")
