@@ -48,6 +48,8 @@ def home():
                 f.seek(0)
                     
                 json.dump(file_data, f, indent=4)
+
+                return page(Username, id)
        
 
     return render_template("create.html")
