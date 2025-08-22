@@ -1,5 +1,3 @@
 # This contains many mini projects
 
-- flask-json
-- fontti
-- nappi
+All them are not public.
