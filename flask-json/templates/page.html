@@ -13,7 +13,7 @@
     <!-- After user is log in -->
     <div class="otsikko">
         <h1 class="h1" style="text-align: center;"><span id="teksti"></span> {{ Username }}</h1>
-        <p style="font-size: 0.8rem; float: left; margin-left: 1.2rem;">Your UserID: {{ UserID2 }}</p>   
+        <p style="font-size: 0.8rem; float: left; margin-left: 1.2rem;" id="userid">Your UserID: {{ data.id }}</p>   
         <a class="logout" href="{{ url_for('Signin') }}">Log out</a>
         <button onclick="mode()" class="mode">Dark mode</button>
     </div>
@@ -41,7 +41,10 @@
             
         </div>
     </div>
-    
-    <script src="{{ url_for('static', filename='page.js') }}"></script>
+    <script>
+        var UserID2 =  "{{ data.id }}";
+    </script>
+    <script src="{{ url_for('static', filename='page.js') }}">
+    </script>
 </body>
 </html> 

@@ -1,4 +1,5 @@
 let n = 0;
+
 nayta = (nayttaa) =>{
     n += 1;
     if (nayttaa == "todo" & n == 1) {
@@ -15,9 +16,9 @@ let teksti = "";
 
 if (tunti < 12) {
     teksti = "Good morning"
-} else if (tunti => 12 && tunti < 18) {
+} else if (tunti >= 12 && tunti < 18) {
     teksti = "Good afternoon"
-} else if (tunti => 18 && tunti < 22) {
+} else if (tunti >= 18 && tunti < 22) {
     teksti = "Good evening"
 }
 

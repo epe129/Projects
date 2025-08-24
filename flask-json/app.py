@@ -5,9 +5,10 @@ import json
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
-@app.route('/page')
+@app.route('/page', methods =["GET", "POST"])
 def page(Username2, UserID2):
-    return render_template("page.html", Username=Username2, UserID2=UserID2)
+    data = {'id': f"{UserID2}"}
+    return render_template("page.html", Username=Username2, data=data)
 
 @app.route('/', methods =["GET", "POST"])
 def home():
