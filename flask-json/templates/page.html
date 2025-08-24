@@ -4,52 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='page.css') }}">
     <style>
-        .main{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            width: 100%;
-            height: 100%;
-        }
         
-        .otsikko {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: 0 auto;
-            width: 50%;
-            height: 100%;
-        }
-
     </style>
 </head>
-<body>
+<body id="body">
     <!-- After user is log in -->
     <div class="otsikko">
         <h1 class="h1" style="text-align: center;"><span id="teksti"></span> {{ Username }}</h1>
         <p style="font-size: 0.8rem; float: left; margin-left: 1.2rem;">Your UserID: {{ UserID2 }}</p>   
+        <a class="logout" href="{{ url_for('Signin') }}">Log out</a>
+        <button onclick="mode()" class="mode">Dark mode</button>
     </div>
-
+    <br>
     <div class="main" id="main">
+        <ol class="list">
+            <li onclick="nayta('todo')" id="todo">Todo</li>
+            <li onclick="nayta('blogi')" id="blogi">Blogi</li>
+            <li onclick="nayta('calenter')" id="calenter">Calenter</li>
+        </ol>
+        <div class="div" id="tododiv">
+            <div style="flex-direction: column; margin-top: 20px;">
+                <input type="text" name="task" placeholder="Give the task" id="addTask">
+                <input placeholder="delete task" id="DeleteTask">
+                <p style="font-size: 0.8rem; color: white;">Task is added after enter is pressed</p>
+                <p style="color: white; text-align: center;" id="task"></p>
+            </div>
+        </div>
         
+        <div class="div" id="blogidiv">
+
+        </div>
+
+        <div class="div" id="calenterdiv">
+            
+        </div>
     </div>
     
-    <script>
-        const aika = new Date();
-        const tunti = aika.getHours();
-        let teksti = "";
-        console.log(tunti)
-        if (tunti < 12) {
-            teksti = "Good morning"
-        } else if (tunti > 12 && tunti < 18) {
-            teksti = "Good afternoon"
-        } else if (tunti > 18 && tunti < 22) {
-            teksti = "Good evening"
-        }
-        document.getElementById("teksti").innerHTML = teksti;
-    </script>
+    <script src="{{ url_for('static', filename='page.js') }}"></script>
 </body>
-</html>
+</html> 

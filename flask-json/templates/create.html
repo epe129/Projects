@@ -13,7 +13,8 @@
             <h1>Create account</h1>
             <input name="Username" placeholder="Username" required>
             <input type="password" name="Password" placeholder="Password" required>       
-            <p>Type your UserID <input style="padding: 3px; margin: 0; width: 40px;" type="number" min="1" max="1000" name="id" id="id" required></input> and Remember That!</p>
+            <p id="ptext">Type your UserID <input style="padding: 3px; margin: 0; width: 40px;" type="number" min="1" max="1000" name="id" id="id" required></input> and Remember That!</p>
+            <p id="taken">{{ taken }}</p>
             <button type="submit">Submit</button> 
         </form>
         <br>

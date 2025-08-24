@@ -14,6 +14,7 @@ def home():
     Username = ""
     Password = ""
     hashed_password = ""
+    taken = ""
     
     if request.method == "POST":
         Username = request.form.get("Username").capitalize()
@@ -34,12 +35,13 @@ def home():
         with open("json.json", "r+") as f:
             file_data = json.load(f)
             for key, value in file_data.items():
-                for nimi in value:
-                    if Username == nimi["Username"]:
+                for arvo in value:
+                    if Username == arvo["Username"] or id == arvo["id"]:
                         tunnus.clear()
                         Username = ""
                         Password = ""
                         hashed_password = ""
+                        taken = "Username or id is taken"               
             if Username == "" and Password == "":
                 pass
             else:
@@ -52,11 +54,11 @@ def home():
                 return page(Username, id)
        
 
-    return render_template("create.html")
+    return render_template("create.html", taken=taken)
 
 @app.route('/Signin', methods =["GET", "POST"])
 def Signin():
-    
+    wrong = ""
     if request.method == "POST":
         Username2 = request.form.get("Username").capitalize()
         Password2 = request.form.get("Password")
@@ -72,15 +74,15 @@ def Signin():
                     getpassword = d["Password"]
 
                     oikeia = bcrypt.check_password_hash(getpassword, Password2)
-                   
+                    
                     if UserID2 == getid and Username2 == getusername and oikeia == True:
                         return page(Username2, UserID2)
                     else:
-                        print("väärin")
+                        wrong = "Username, Password or id is wrong!"
                     Username2 = ""
                     Password2 = ""
                     UserID2 = ""
-    return render_template("Signin.html")
+    return render_template("Signin.html", wrong=wrong)
 
 # I haven't started doing this yet.
 @app.route('/admin', methods =["GET", "POST"])
