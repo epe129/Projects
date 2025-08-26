@@ -11,8 +11,8 @@ ui = []
 def page(Username2, UserID2):
     ui.append(Username2)
     ui.append(UserID2)
-
-    return render_template("page.html", Username=Username2, UserID2=UserID2)
+    
+    return render_template('page.html', Username2=Username2, UserID2=UserID2)
 
 @app.route('/blogi', methods =["GET", "POST"])
 def blogi():
