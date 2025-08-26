@@ -1,14 +1,47 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_bcrypt import Bcrypt
 import json
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
-@app.route('/page', methods =["GET", "POST"])
+ui = []
+
+@app.route('/page/<Username2>/<UserID2>', methods =["GET", "POST"])
 def page(Username2, UserID2):
-    data = {'id': f"{UserID2}"}
-    return render_template("page.html", Username=Username2, data=data)
+    ui.append(Username2)
+    ui.append(UserID2)
+
+    return render_template("page.html", Username=Username2, UserID2=UserID2)
+
+@app.route('/blogi', methods =["GET", "POST"])
+def blogi():
+    
+    Username2 = ui[0]
+    UserID2 = ui[1]
+
+    if request.method == "POST":
+        title = request.form.get("title")
+        text = request.form.get("text")
+        print(title)
+        print(text)
+        print(ui)    
+            
+    blogi = {
+        f"{UserID2}": {"title": f"{title}", "text": f"{text}"}
+    }
+    
+    with open("blog.json", "r+") as f:
+        file_data = json.load(f)
+    
+        file_data["blogit"].append(blogi)
+                    
+        f.seek(0)
+                    
+        json.dump(file_data, f, indent=4)                
+        
+    return redirect(url_for('page', Username2=Username2, UserID2=UserID2)), ui.clear()
+
 
 @app.route('/', methods =["GET", "POST"])
 def home():
@@ -51,9 +84,8 @@ def home():
                 f.seek(0)
                     
                 json.dump(file_data, f, indent=4)
-
-                return page(Username, id)
-       
+                
+                return redirect(url_for('page', Username2=Username, UserID2=id))
 
     return render_template("create.html", taken=taken)
 
@@ -77,7 +109,7 @@ def Signin():
                     oikeia = bcrypt.check_password_hash(getpassword, Password2)
                     
                     if UserID2 == getid and Username2 == getusername and oikeia == True:
-                        return page(Username2, UserID2)
+                        return redirect(url_for('page', Username2=Username2, UserID2=UserID2))
                     else:
                         wrong = "Username, Password or id is wrong!"
                     Username2 = ""
@@ -91,4 +123,4 @@ def admin():
     return render_template("admin.html")
 
 if __name__ == '__main__':
-     app.run()
+     app.run(debug=True)

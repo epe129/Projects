@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='page.css') }}">
-    <style>
-        
-    </style>
 </head>
 <body id="body">
     <!-- After user is log in -->
     <div class="otsikko">
-        <h1 class="h1" style="text-align: center;"><span id="teksti"></span> {{ Username }}</h1>
-        <p style="font-size: 0.8rem; float: left; margin-left: 1.2rem;" id="userid">Your UserID: {{ data.id }}</p>   
+        <h1 class="h1"><span id="teksti"></span> {{ Username }}</h1>
+        <p id="userid">Your UserID: {{ UserID2 }}</p>   
         <a class="logout" href="{{ url_for('Signin') }}">Log out</a>
         <button onclick="mode()" class="mode">Dark mode</button>
     </div>
@@ -25,26 +22,30 @@
             <li onclick="nayta('calenter')" id="calenter">Calenter</li>
         </ol>
         <div class="div" id="tododiv">
-            <div style="flex-direction: column; margin-top: 20px;">
+            <div id="todo_inside">
                 <input type="text" name="task" placeholder="Give the task" id="addTask">
                 <input placeholder="delete task" id="DeleteTask">
-                <p style="font-size: 0.8rem; color: white;">Task is added after enter is pressed</p>
-                <p style="color: white; text-align: center;" id="task"></p>
+                <p id="todo_p">Task is added after enter is pressed</p>
+                <p id="task"></p>
             </div>
         </div>
         
         <div class="div" id="blogidiv">
-
+            <form action="{{ url_for("blogi")}}" method="post">
+                <h3 id="blog_title">Blog</h3>
+                <input name="title" id="title" placeholder="title" required>
+                <br>
+                <br>
+                <textarea name="text" id="text" rows="4" cols="50" placeholder="text" required></textarea>
+                <br>
+                <input type="submit" value="Submit" id="Submit">
+            </form>
         </div>
 
         <div class="div" id="calenterdiv">
             
         </div>
     </div>
-    <script>
-        var UserID2 =  "{{ data.id }}";
-    </script>
-    <script src="{{ url_for('static', filename='page.js') }}">
-    </script>
+    <script src="{{ url_for('static', filename='page.js') }}"></script>
 </body>
 </html> 

@@ -1,12 +1,20 @@
-let n = 0;
-
 nayta = (nayttaa) =>{
-    n += 1;
-    if (nayttaa == "todo" & n == 1) {
-        document.getElementById("tododiv").style.display = "flex";
-    } else {
-        document.getElementById("tododiv").style.display = "none";
-        n = 0
+    switch (nayttaa) {
+        case "todo":
+            document.getElementById("blogidiv").style.display = "none"
+            document.getElementById("calenterdiv").style.display = "none"
+            document.getElementById("tododiv").style.display = "flex"
+            break;
+        case "blogi":
+            document.getElementById("calenterdiv").style.display = "none"
+            document.getElementById("tododiv").style.display = "none"    
+            document.getElementById("blogidiv").style.display = "flex"
+            break;
+        case "calenter":
+            document.getElementById("tododiv").style.display = "none"
+            document.getElementById("blogidiv").style.display = "none"
+            document.getElementById("calenterdiv").style.display = "flex"
+            break;
     }
 }
 
