@@ -14,8 +14,9 @@ def page(Username2, UserID2):
     
     return render_template('page.html', Username2=Username2, UserID2=UserID2)
 
-@app.route('/blogi', methods =["GET", "POST"])
-def blogi():
+# do the were user can see his blogs
+@app.route('/Write_blog', methods =["GET", "POST"])
+def Write_blog():
     
     Username2 = ui[0]
     UserID2 = ui[1]
@@ -27,14 +28,14 @@ def blogi():
         print(text)
         print(ui)    
             
-    blogi = {
+    Write_blog = {
         f"{UserID2}": {"title": f"{title}", "text": f"{text}"}
     }
     
     with open("blog.json", "r+") as f:
         file_data = json.load(f)
     
-        file_data["blogit"].append(blogi)
+        file_data["blogit"].append(Write_blog)
                     
         f.seek(0)
                     

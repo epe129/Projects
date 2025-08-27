@@ -8,19 +8,20 @@
 </head>
 <body id="body">
     <!-- After user is log in -->
-    <div class="otsikko">
-        <h1 class="h1"><span id="teksti"></span> {{ Username }}</h1>
+    <div class="title">
+        <h1 class="h1"><span id="teksti"></span> {{ Username2 }}</h1>
         <p id="userid">Your UserID: {{ UserID2 }}</p>   
         <a class="logout" href="{{ url_for('Signin') }}">Log out</a>
         <button onclick="mode()" class="mode">Dark mode</button>
+        <div class="divButtons">
+            <button class="d_button" onclick="nayta('todo')" id="todo">Todo</button>
+            <button class="d_button" onclick="nayta('calenter')" id="calenter">Calenter</button>
+            <button class="d_button" onclick="nayta('Write_blog')" id="blogi">Write blog</button>
+            <button class="d_button" onclick="" id="blogi">See the blogs</button>
+        </div>    
     </div>
-    <br>
+    
     <div class="main" id="main">
-        <ol class="list">
-            <li onclick="nayta('todo')" id="todo">Todo</li>
-            <li onclick="nayta('blogi')" id="blogi">Blogi</li>
-            <li onclick="nayta('calenter')" id="calenter">Calenter</li>
-        </ol>
         <div class="div" id="tododiv">
             <div id="todo_inside">
                 <input type="text" name="task" placeholder="Give the task" id="addTask">
@@ -31,20 +32,21 @@
         </div>
         
         <div class="div" id="blogidiv">
-            <form action="{{ url_for("blogi")}}" method="post">
+            <form id="blogForm" action="{{ url_for('Write_blog')}}" method="post">
                 <h3 id="blog_title">Blog</h3>
-                <input name="title" id="title" placeholder="title" required>
+                <input name="title" id="title_blog_input" placeholder="title" required>
                 <br>
                 <br>
-                <textarea name="text" id="text" rows="4" cols="50" placeholder="text" required></textarea>
+                <textarea name="text" id="text" rows="10" cols="50" placeholder="text" required></textarea>
                 <br>
-                <input type="submit" value="Submit" id="Submit">
+                <input type="submit" value="Submit" id="Submit_blog">
             </form>
         </div>
 
         <div class="div" id="calenterdiv">
             
         </div>
+
     </div>
     <script src="{{ url_for('static', filename='page.js') }}"></script>
 </body>

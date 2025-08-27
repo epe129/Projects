@@ -5,7 +5,7 @@ nayta = (nayttaa) =>{
             document.getElementById("calenterdiv").style.display = "none"
             document.getElementById("tododiv").style.display = "flex"
             break;
-        case "blogi":
+        case "Write_blog":
             document.getElementById("calenterdiv").style.display = "none"
             document.getElementById("tododiv").style.display = "none"    
             document.getElementById("blogidiv").style.display = "flex"
