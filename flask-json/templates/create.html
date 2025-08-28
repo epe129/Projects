@@ -11,14 +11,20 @@
     <div class="main">
         <form action="{{ url_for("home")}}" method="post" class="form">
             <h1>Create account</h1>
-            <input name="Username" placeholder="Username" required>
-            <input type="password" name="Password" placeholder="Password" required>       
-            <p id="ptext">Type your UserID <input style="padding: 3px; margin: 0; width: 40px;" type="number" min="1" max="1000" name="id" id="id" required></input> and Remember That!</p>
+            {{ form.hidden_tag() }}
+            {{ form.Username() }}
+            {{ form.Password() }}
             <p id="taken">{{ taken }}</p>
-            <button type="submit">Submit</button> 
+            {{ form.id() }}
+            {{ form.submit() }}
         </form>
         <br>
         <a class="a" href="{{ url_for('Signin') }}">Sing in</a>
     </div>
 </body>
 </html>
+<!-- 
+
+<input name="Username" placeholder="Username" required>
+            <input type="password" name="Password" placeholder="Password" required>       
+            <button type="submit">Submit</button>  -->
