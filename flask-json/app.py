@@ -130,7 +130,7 @@ def page(Username2, UserID2):
     
     return render_template('page.html', Username2=Username2, UserID2=UserID2)
 
-# do the were user can see his blogs
+# do the were user can see his blogs and the form CSRF
 @app.route('/Write_blog', methods =["GET", "POST"])
 def Write_blog():
     
