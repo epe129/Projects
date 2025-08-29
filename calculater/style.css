@@ -1,0 +1,59 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    min-width: 215px;
+    max-width: 235px;
+    min-height: 250px;
+    max-height: 260px;
+    border: 1px solid black;
+}
+
+.nayta {
+    margin-top: 10px;
+    margin-left: 14px;
+    width: 136px;
+    height: 20px;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 15px;
+}
+
+.merkit {
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0px 0px 10px;
+    padding: 0;
+    flex: 0;
+    cursor: pointer;
+}
+
+.merkki {
+    border: 1px solid black;
+    width: 44px;
+    height: 35px;
+    margin: 3px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.merkki_numero {
+    width: 44px;
+    padding: 10px 10px 10px 10px;
+    margin: 2px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.numerot {
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 21px;
+    margin-right: 79px;
+    margin-bottom: 0;
+    left: 0;
+    right: 0;
+    width: 160px;
+}
