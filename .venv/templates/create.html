@@ -12,10 +12,10 @@
         <form action="{{ url_for("home")}}" method="post" class="form">
             <h1>Create account</h1>
             {{ form.hidden_tag() }}
-            {{ form.Username() }}
-            {{ form.Password() }}
+            Username: {{ form.Username() }}
+            Password: {{ form.Password() }}
             <p id="taken">{{ taken }}</p>
-            {{ form.id() }}
+            UserID: {{ form.id() }}
             {{ form.submit() }}
         </form>
         <br>
@@ -23,8 +23,3 @@
     </div>
 </body>
 </html>
-<!-- 
-
-<input name="Username" placeholder="Username" required>
-            <input type="password" name="Password" placeholder="Password" required>       
-            <button type="submit">Submit</button>  -->

@@ -12,9 +12,9 @@
         <form action="{{ url_for("Signin")}}" method="POST" class="form">
             {{ form2.hidden_tag() }}
             <h1>Sign in</h1>
-            {{ form2.Username2() }}
-            {{ form2.Password2() }}
-            {{ form2.id2() }}
+            Username: {{ form2.Username2() }}
+            Password: {{ form2.Password2() }}
+            UserID: {{ form2.id2() }}
             {{ form2.submit2() }}  
             <p style="margin-top: 5px; font-size: 1rem;">{{ wrong }}</p>
         </form>
@@ -23,8 +23,3 @@
     </div>
 </body>
 </html>
-
-            <!-- <button type="submit">Submit</button>  -->
-            <!-- <input name="Username" placeholder="Username">
-            <input type="password" name="Password" placeholder="Password">       
-            <input type="number" max="100" name="UserID" placeholder="UserID"> -->
