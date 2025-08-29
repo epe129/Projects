@@ -5,9 +5,15 @@ let valimerkki;
 function clickt(merkki) {
     
     let nayta = document.getElementById("nayta");
+    if (merkit.length == 1 && isNaN(merkki) == false) {
+        nayta.innerHTML = "";
+        merkit = []
+    }
 
     nayta.innerHTML += merkki;
-     
+    console.log(merkit)
+    
+
     if (isNaN(merkki) == false && merkki.length > 0 || merkki == ".") {
         sama += merkki
     } else {
@@ -57,7 +63,7 @@ function clickt(merkki) {
                     vastaus = parseFloat(merkit[0]) + parseFloat(merkit[2])
                     nayta.innerHTML = vastaus;
                     merkit = []
-                    merkit.push(`${vastaus}`)                         
+                    merkit.push(`${vastaus}`)                      
                     break;
                 case "-":
                     vastaus = parseFloat(merkit[0]) - parseFloat(merkit[2])
@@ -81,4 +87,3 @@ function clickt(merkki) {
         }
     }
 }
-
