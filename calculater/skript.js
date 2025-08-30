@@ -11,12 +11,12 @@ function clickt(merkki) {
         merkit = []
     }
 
-    nayta.innerHTML += merkki;
     console.log(merkit)
     
 
     if (isNaN(merkki) == false && merkki.length > 0 || merkki == ".") {
         sama += merkki
+        nayta.innerHTML += merkki;
     } else {
         merkit.push(sama);
         sama = ""
@@ -26,6 +26,7 @@ function clickt(merkki) {
     
     if (isNaN(merkki) == true && merkki.length > 0  && merkki != "=" && merkki != "." && sisaltaako == false) {
         merkit.push(merkki);   
+        nayta.innerHTML += merkki;
     }
 
     if (merkki == "c"){

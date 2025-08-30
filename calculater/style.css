@@ -14,12 +14,13 @@
     margin-top: 10px;
     margin-left: 14px;
     width: 136px;
-    height: 20px;
+    height: 30px;
     padding: 5px;
     background-color: grey;
     color: white;
     border: 1px solid black;
     font-size: 15px;
+    overflow: auto;
 }
 
 .merkit {
@@ -54,7 +55,7 @@
 
 .numerot {
     position: absolute;
-    margin-top: 50px;
+    margin-top: 70px;
     margin-left: 21px;
     margin-right: 79px;
     margin-bottom: 0;
