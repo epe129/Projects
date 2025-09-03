@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import StringField, SubmitField, IntegerField
+from wtforms import StringField, SubmitField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired
 import json
 import os
@@ -12,8 +12,6 @@ bcrypt = Bcrypt(app)
 SECRET_KEY = os.urandom(32)
 app.secret_key = SECRET_KEY  
 csrf = CSRFProtect(app)  
-
-ui = []
 
 class Register(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
@@ -123,41 +121,52 @@ def Signin():
 def admin():
     return render_template("admin.html")
 
+class blog(FlaskForm):
+    title  = StringField('title', validators=[DataRequired()])
+    text  = TextAreaField('text', render_kw={'rows': 10, 'cols': 50}, validators=[DataRequired()])
+    submit3 = SubmitField('Submit')
+
+# there should be no bugs
 @app.route('/page/<Username2>/<UserID2>', methods =["GET", "POST"])
 def page(Username2, UserID2):
-    ui.append(Username2)
-    ui.append(UserID2)
-    
-    return render_template('page.html', Username2=Username2, UserID2=UserID2)
-
-# do the were user can see his blogs and the form CSRF
-@app.route('/Write_blog', methods =["GET", "POST"])
-def Write_blog():
-    
-    Username2 = ui[0]
-    UserID2 = ui[1]
+    form3 = blog()
+    title = ""
+    text = ""
 
     if request.method == "POST":
-        title = request.form.get("title")
-        text = request.form.get("text")
-        print(title)
-        print(text)
-        print(ui)    
-            
-    Write_blog = {
-        f"{UserID2}": {"title": f"{title}", "text": f"{text}"}
-    }
-    
-    with open("blog.json", "r+") as f:
-        file_data = json.load(f)
-    
-        file_data["blogit"].append(Write_blog)
-                    
-        f.seek(0)
-                    
-        json.dump(file_data, f, indent=4)                
+        if form3.validate_on_submit():
+            title = form3.title.data
+            text = form3.text.data
+            print(title)
+            print(text)
+
+    if title == "" or text == "":
+        pass
+    else:        
+        Write_blog = {
+            "id": f"{UserID2}", 
+            "title": f"{title}",
+            "text": f"{text}"
+        }
         
-    return redirect(url_for('page', Username2=Username2, UserID2=UserID2)), ui.clear()
+        with open("blog.json", "r+") as f:
+            file_data = json.load(f)
+            for key, value in file_data.items():
+                for a in value:
+                    if a["id"] == UserID2 and a["title"] == title and a["text"] == text:
+                        title = ""
+                        text = ""
+            
+            if title == "" or text == "":
+                pass
+            else:
+                file_data["blogit"].append(Write_blog)
+                            
+                f.seek(0)
+                            
+                json.dump(file_data, f, indent=4)              
+                
+    return render_template('page.html', Username2=Username2, UserID2=UserID2, form3=form3)
 
 
 if __name__ == '__main__':

@@ -153,6 +153,10 @@
     color: black;
 }
 
+#label {
+    color: white;
+}
+
 /* multiple css */
 
 #title, #text, #addTask, #DeleteTask  {

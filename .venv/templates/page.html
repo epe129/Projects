@@ -32,14 +32,17 @@
         </div>
         
         <div class="div" id="blogidiv">
-            <form id="blogForm" action="{{ url_for('Write_blog')}}" method="post">
+            <form id="blogForm" action="{{ url_for('page', Username2=Username2, UserID2=UserID2,)}}" method="post">
+                {{ form3.hidden_tag() }}
                 <h3 id="blog_title">Blog</h3>
-                <input name="title" id="title_blog_input" placeholder="title" required>
+                <label id="label">Title:</label> {{ form3.title() }}
                 <br>
                 <br>
-                <textarea name="text" id="text" rows="10" cols="50" placeholder="text" required></textarea>
+                <label id="label">text:</label>
                 <br>
-                <input type="submit" value="Submit" id="Submit_blog">
+                {{ form3.text() }}
+                <br>
+                {{ form3.submit3() }}
             </form>
         </div>
 
