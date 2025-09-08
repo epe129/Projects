@@ -1,17 +1,21 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired
+from flask_session import Session
 import json
 import os
 # lisää flask session
 
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False  
+app.config["SESSION_TYPE"] = "filesystem" 
 bcrypt = Bcrypt(app)
 SECRET_KEY = os.urandom(32)
 app.secret_key = SECRET_KEY  
 csrf = CSRFProtect(app)  
+Session(app)
 
 class Register(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
@@ -33,6 +37,7 @@ def home():
             Username = form.Username.data.lower()
             Password = form.Password.data
             id = form.id.data
+            session["UserID2"] = id
 
         else:
             return "Error!"
@@ -90,6 +95,7 @@ def Signin():
             Username2 = form2.Username2.data.lower()
             Password2 = form2.Password2.data
             UserID2 = form2.id2.data
+            session["UserID2"] = UserID2
             
             with open("json.json", "r") as tiedosto:
                 data = tiedosto.read()
@@ -129,6 +135,9 @@ class blog(FlaskForm):
 # there should be no bugs
 @app.route('/page/<Username2>/<UserID2>', methods =["GET", "POST"])
 def page(Username2, UserID2):
+    if not session.get("UserID2"):
+        return redirect("/Signin")
+    
     form3 = blog()
     title = ""
     text = ""
@@ -168,6 +177,14 @@ def page(Username2, UserID2):
                 
     return render_template('page.html', Username2=Username2, UserID2=UserID2, form3=form3)
 
+@app.route("/logout")
+def logout():
+    session["UserID2"] = None
+    return redirect("/")
+
+@app.route("/blogs")
+def blogs():
+    return render_template("blogs.html")
 
 if __name__ == '__main__':
      app.run(debug=True)
