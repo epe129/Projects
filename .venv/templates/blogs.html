@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='blogs.css') }}">
+    <title>Your blogs</title>
 </head>
 <body>
-    
+    <h2>Hello {{ Username }}</h2>
+    <h3>See your blogs:</h3>
+    {%for i in result%}
+        <li>id: {{ i["id"] }} title: {{ i["title"] }}<br>text: {{ i["text"] }}</li>
+        <br>
+    {%endfor%}
 </body>
 </html>

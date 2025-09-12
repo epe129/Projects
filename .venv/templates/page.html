@@ -9,15 +9,15 @@
 <body id="body">
     <!-- After user is log in -->
     <div class="title">
-        <h1 class="h1"><span id="teksti"></span> {{ Username2 }}</h1>
-        <p id="userid">Your UserID: {{ UserID2 }}</p>   
+        <h1 class="h1"><span id="teksti"></span> {{ Username }}</h1>
+        <p id="userid">Your UserID: {{ id }}</p>   
         <a class="logout" href="{{ url_for('logout') }}">Log out</a>
         <button onclick="mode()" class="mode">Dark mode</button>
         <div class="divButtons">
             <button class="d_button" onclick="nayta('todo')" id="todo">Todo</button>
             <button class="d_button" onclick="nayta('calenter')" id="calenter">Calenter</button>
             <button class="d_button" onclick="nayta('Write_blog')" id="blogi">Write blog</button>
-            <button class="d_button" id="blogs_button"><a href="{{ url_for('blogs') }}" target="_blank" class="blogs_a">See the blogs</a></button>
+            <button class="d_button" id="blogs_button"><a href="{{ url_for('blogs', Username=Username, id=id,) }}" target="_blank" class="blogs_a">See the blogs</a></button>
         </div>    
     </div>
     <div class="main" id="main">
@@ -32,7 +32,7 @@
         </div>
         <!-- blogs -->
         <div class="div" id="blogidiv">
-            <form id="blogForm" action="{{ url_for('page', Username2=Username2, UserID2=UserID2,)}}" method="post">
+            <form id="blogForm" action="{{ url_for('page', Username=Username, id=id,)}}" method="post">
                 {{ form3.hidden_tag() }}
                 <h3 id="blog_title">Blog</h3>
                 <label id="label">Title:</label> {{ form3.title() }}

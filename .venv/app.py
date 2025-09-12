@@ -6,7 +6,6 @@ from wtforms.validators import DataRequired
 from flask_session import Session
 import json
 import os
-# lisää flask session
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False  
@@ -16,6 +15,8 @@ SECRET_KEY = os.urandom(32)
 app.secret_key = SECRET_KEY  
 csrf = CSRFProtect(app)  
 Session(app)
+
+
 
 class Register(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
@@ -37,7 +38,7 @@ def home():
             Username = form.Username.data.lower()
             Password = form.Password.data
             id = form.id.data
-            session["UserID2"] = id
+            session["id"] = id
 
         else:
             return "Error!"
@@ -72,12 +73,12 @@ def home():
                     
                 json.dump(file_data, f, indent=4)
                 
-                return redirect(url_for('page', Username2=Username, UserID2=id))
+                return redirect(url_for('page', Username=Username, id=id))
 
     return render_template("create.html", taken=taken, form=form)
 
 class SigninClass(FlaskForm):
-    Username2  = StringField('Username', validators=[DataRequired()])
+    Username  = StringField('Username', validators=[DataRequired()])
     Password2 = StringField('Password', validators=[DataRequired()])
     id2 = StringField('id', validators=[DataRequired()])
     submit2 = SubmitField('Submit')
@@ -85,38 +86,39 @@ class SigninClass(FlaskForm):
 @app.route('/Signin', methods =["GET", "POST"])
 def Signin():
     form2 = SigninClass()
+
     wrong = ""
-    Username2 = ""
+    Username = ""
     Password2 = ""
-    UserID2 = ""
+    id = ""
 
     if request.method == "POST":
         if form2.validate_on_submit():
-            Username2 = form2.Username2.data.lower()
+            Username = form2.Username.data.lower()
             Password2 = form2.Password2.data
-            UserID2 = form2.id2.data
-            session["UserID2"] = UserID2
+            id = form2.id2.data
+            session["id"] = id
             
             with open("json.json", "r") as tiedosto:
                 data = tiedosto.read()
                 tiedot = json.loads(data)
                 for key, value in tiedot.items():
                     for d in value:
-                        if d["Username"] == Username2:
+                        if d["Username"] == Username:
                             getid = d["id"]
                             getusername = d["Username"]
                             getpassword = d["Password"]
                             
                             is_valid = bcrypt.check_password_hash(getpassword, Password2)
 
-                            if str(UserID2) in getid and Username2 in getusername and is_valid == True:
-                                return redirect(url_for('page', Username2=Username2, UserID2=UserID2))
+                            if str(id) in getid and Username in getusername and is_valid == True:                
+                                return redirect(url_for('page', Username=Username, id=id))
                             else:
                                 wrong = "Username, Password or id is wrong!"
 
-                            Username2 = ""
+                            Username = ""
                             Password2 = ""
-                            UserID2 = ""
+                            id = ""
         else:
             return "Error!"
     
@@ -132,12 +134,12 @@ class blog(FlaskForm):
     text  = TextAreaField('text', render_kw={'rows': 10, 'cols': 50}, validators=[DataRequired()])
     submit3 = SubmitField('Submit')
 
-# there should be no bugs
-@app.route('/page/<Username2>/<UserID2>', methods =["GET", "POST"])
-def page(Username2, UserID2):
-    if not session.get("UserID2"):
+@app.route('/page/<Username>/<id>', methods =["GET", "POST"])
+def page(Username, id):
+    blogs(Username, id)
+    if not session.get("id"):
         return redirect("/Signin")
-    
+
     form3 = blog()
     title = ""
     text = ""
@@ -153,7 +155,7 @@ def page(Username2, UserID2):
         pass
     else:        
         Write_blog = {
-            "id": f"{UserID2}", 
+            "id": f"{id}", 
             "title": f"{title}",
             "text": f"{text}"
         }
@@ -162,7 +164,7 @@ def page(Username2, UserID2):
             file_data = json.load(f)
             for key, value in file_data.items():
                 for a in value:
-                    if a["id"] == UserID2 and a["title"] == title and a["text"] == text:
+                    if a["id"] == id and a["title"] == title and a["text"] == text:
                         title = ""
                         text = ""
             
@@ -175,16 +177,29 @@ def page(Username2, UserID2):
                             
                 json.dump(file_data, f, indent=4)              
                 
-    return render_template('page.html', Username2=Username2, UserID2=UserID2, form3=form3)
+    return render_template('page.html', Username=Username, id=id, form3=form3)
 
 @app.route("/logout")
 def logout():
-    session["UserID2"] = None
+    session["id"] = None
     return redirect("/")
 
-@app.route("/blogs")
-def blogs():
-    return render_template("blogs.html")
+# make it that can delete blog
+@app.route("/blogs/<Username>/<id>")
+def blogs(Username, id):
+    HerBlogs = []
+    
+    with open("blog.json", "r+") as f:
+        file_data = json.load(f)
+        for key, value in file_data.items():
+            for result in value:
+                if result["id"] == str(id):
+                    HerBlogs.append(result)
+                else:
+                    continue
+   
+    return render_template("blogs.html", Username=Username, id=id, result=HerBlogs, p=len(HerBlogs))
+
 
 if __name__ == '__main__':
      app.run(debug=True)
