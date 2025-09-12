@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import StringField, SubmitField, IntegerField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 from flask_session import Session
 import json
@@ -39,7 +39,6 @@ def home():
             Password = form.Password.data
             id = form.id.data
             session["id"] = id
-
         else:
             return "Error!"
 
@@ -54,10 +53,12 @@ def home():
             "Username": f"{Username}",
             "Password": f"{hashed_password}",
         }
+        # fill json with user data
         with open("json.json", "r+") as f:
             file_data = json.load(f)
             for key, value in file_data.items():
                 for arvo in value:
+                    # if username or id is taken fails
                     if Username == arvo["Username"] or id == arvo["id"]:
                         tunnus.clear()
                         Username = ""
@@ -98,7 +99,7 @@ def Signin():
             Password2 = form2.Password2.data
             id = form2.id2.data
             session["id"] = id
-            
+            # retrieves user data from json
             with open("json.json", "r") as tiedosto:
                 data = tiedosto.read()
                 tiedot = json.loads(data)
@@ -110,7 +111,7 @@ def Signin():
                             getpassword = d["Password"]
                             
                             is_valid = bcrypt.check_password_hash(getpassword, Password2)
-
+                            #  check that password, id and username is right
                             if str(id) in getid and Username in getusername and is_valid == True:                
                                 return redirect(url_for('page', Username=Username, id=id))
                             else:
@@ -150,6 +151,8 @@ def page(Username, id):
             text = form3.text.data
             print(title)
             print(text)
+        else:
+            return "Error!"
 
     if title == "" or text == "":
         pass
@@ -159,7 +162,7 @@ def page(Username, id):
             "title": f"{title}",
             "text": f"{text}"
         }
-        
+        # appends blog in json file
         with open("blog.json", "r+") as f:
             file_data = json.load(f)
             for key, value in file_data.items():
@@ -188,7 +191,7 @@ def logout():
 @app.route("/blogs/<Username>/<id>")
 def blogs(Username, id):
     HerBlogs = []
-    
+    # retrieves blogs from a json file
     with open("blog.json", "r+") as f:
         file_data = json.load(f)
         for key, value in file_data.items():
