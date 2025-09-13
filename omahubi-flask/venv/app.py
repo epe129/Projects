@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import StringField, SubmitField, TextAreaField
+from wtforms import StringField, SubmitField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired
 from flask_session import Session
 import json
@@ -16,11 +16,9 @@ app.secret_key = SECRET_KEY
 csrf = CSRFProtect(app)  
 Session(app)
 
-
-
 class Register(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
-    Password = StringField('Password', validators=[DataRequired()])
+    Password = PasswordField('Password', validators=[DataRequired()])
     id = StringField('id', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
@@ -80,7 +78,7 @@ def home():
 
 class SigninClass(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
-    Password2 = StringField('Password', validators=[DataRequired()])
+    Password2 = PasswordField('Password', validators=[DataRequired()])
     id2 = StringField('id', validators=[DataRequired()])
     submit2 = SubmitField('Submit')
 
@@ -125,10 +123,23 @@ def Signin():
     
     return render_template("Signin.html", wrong=wrong, form2=form2)
 
+class adminlogin(FlaskForm):
+    name  = StringField('name', validators=[DataRequired()])
+    password  = PasswordField('password', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
 # I haven't started doing this yet.
-@app.route('/admin', methods =["GET", "POST"])
-def admin():
-    return render_template("admin.html")
+@app.route('/adminLogin', methods =["GET", "POST"])
+def adminLogin():
+    form = adminlogin()
+
+    if request.method == "POST":
+        if form.validate_on_submit():
+            username = form.name.data
+            password = form.password.data
+        else:
+            return "Error!"
+    return render_template("adminLogin.html", form=form)
 
 class blog(FlaskForm):
     title  = StringField('title', validators=[DataRequired()])
@@ -141,16 +152,14 @@ def page(Username, id):
     if not session.get("id"):
         return redirect("/Signin")
 
-    form3 = blog()
+    form = blog()
     title = ""
     text = ""
 
     if request.method == "POST":
-        if form3.validate_on_submit():
-            title = form3.title.data
-            text = form3.text.data
-            print(title)
-            print(text)
+        if form.validate_on_submit():
+            title = form.title.data
+            text = form.text.data
         else:
             return "Error!"
 
@@ -180,7 +189,7 @@ def page(Username, id):
                             
                 json.dump(file_data, f, indent=4)              
                 
-    return render_template('page.html', Username=Username, id=id, form3=form3)
+    return render_template('page.html', Username=Username, id=id, form=form)
 
 @app.route("/logout")
 def logout():

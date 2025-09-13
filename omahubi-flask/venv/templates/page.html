@@ -33,16 +33,16 @@
         <!-- blogs -->
         <div class="div" id="blogidiv">
             <form id="blogForm" action="{{ url_for('page', Username=Username, id=id,)}}" method="post">
-                {{ form3.hidden_tag() }}
+                {{ form.hidden_tag() }}
                 <h3 id="blog_title">Blog</h3>
-                <label id="label">Title:</label> {{ form3.title() }}
+                <label id="label">Title:</label> {{ form.title() }}
                 <br>
                 <br>
                 <label id="label">text:</label>
                 <br>
-                {{ form3.text() }}
+                {{ form.text() }}
                 <br>
-                {{ form3.submit3() }}
+                {{ form.submit3() }}
             </form>
         </div>
         <!-- calenter haven't started doing yet-->

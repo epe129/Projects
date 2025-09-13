@@ -6,4 +6,5 @@ __pycache__/
 pyvenv.cfg
 json.json
 blog.json
+admin.json
 flask_session
