@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminpage.css') }}">
+    <title>Admin</title>
 </head>
 <body>
-    
+    <h1>Käyttäjät</h1>
+    <div class="main_div">
+        <div style="width: 200px; border: 1px solid black; padding: 10px 10px;">
+            <ol>
+            {%for i in kayttajat%}
+                <li>{{ i["id"] }} {{ i["Username"] }}</li>
+                <br>
+            {%endfor%}
+            </ol>
+        </div>
+        <div style="width: 200px; border: 1px solid black; padding: 10px 10px;">
+            <label>Poista Käyttäjä</label>
+            <input type="text">
+        </div>
+        
+    </div>
 </body>
 </html>

@@ -16,6 +16,7 @@ app.secret_key = SECRET_KEY
 csrf = CSRFProtect(app)  
 Session(app)
 
+# Create account
 class Register(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
     Password = PasswordField('Password', validators=[DataRequired()])
@@ -73,9 +74,11 @@ def home():
                 json.dump(file_data, f, indent=4)
                 
                 return redirect(url_for('page', Username=Username, id=id))
+    is_runnig()
 
     return render_template("create.html", taken=taken, form=form)
 
+# Signin
 class SigninClass(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
     Password2 = PasswordField('Password', validators=[DataRequired()])
@@ -120,27 +123,70 @@ def Signin():
                             id = ""
         else:
             return "Error!"
-    
+    is_runnig()
+
     return render_template("Signin.html", wrong=wrong, form2=form2)
 
+# admin
 class adminlogin(FlaskForm):
     name  = StringField('name', validators=[DataRequired()])
     password  = PasswordField('password', validators=[DataRequired()])
+    id = StringField('id', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-# I haven't started doing this yet.
 @app.route('/adminLogin', methods =["GET", "POST"])
 def adminLogin():
     form = adminlogin()
+    username = ""
+    password = ""
+    id = ""
 
     if request.method == "POST":
         if form.validate_on_submit():
             username = form.name.data
             password = form.password.data
+            id = form.id.data          
+            session["id"] = id
+            with open("admin.json", "r") as tiedosto:
+                data = tiedosto.read()
+                tiedot = json.loads(data)
+                for key, value in tiedot.items():
+                    for d in value:
+                        if d["Username"] == username:
+                            getusername = d["Username"]
+                            getpassword = d["Password"]
+                            
+                            if getusername == username and getpassword == password:                 
+                                return redirect(url_for('adminPage', username=username, id=id))
+                            else:
+                                pass
+                            username = ""
+                            password = ""
         else:
             return "Error!"
+    is_runnig()
+
     return render_template("adminLogin.html", form=form)
 
+@app.route('/adminPage/<username>/<id>', methods =["GET", "POST"])
+def adminPage(username, id):
+    kayttajat = []
+    print(username)
+    if not session.get("id"):
+        return redirect("/adminLogin")
+    
+    with open("json.json", "r") as tiedosto:
+        data = tiedosto.read()
+        tiedot = json.loads(data)
+        for key, value in tiedot.items():
+            for d in value:
+                kayttajat.append(d)
+    is_runnig()
+
+    return render_template("admin.html", kayttajat=kayttajat)
+
+
+# page
 class blog(FlaskForm):
     title  = StringField('title', validators=[DataRequired()])
     text  = TextAreaField('text', render_kw={'rows': 10, 'cols': 50}, validators=[DataRequired()])
@@ -188,18 +234,20 @@ def page(Username, id):
                 f.seek(0)
                             
                 json.dump(file_data, f, indent=4)              
-                
+    is_runnig()
+
     return render_template('page.html', Username=Username, id=id, form=form)
 
 @app.route("/logout")
 def logout():
-    session["id"] = None
+    session.clear()
     return redirect("/")
 
-# make it that can delete blog
+# blogs
 @app.route("/blogs/<Username>/<id>")
 def blogs(Username, id):
     HerBlogs = []
+    # make it that can delete blog
     # retrieves blogs from a json file
     with open("blog.json", "r+") as f:
         file_data = json.load(f)
@@ -209,9 +257,20 @@ def blogs(Username, id):
                     HerBlogs.append(result)
                 else:
                     continue
-   
+    is_runnig()
+
     return render_template("blogs.html", Username=Username, id=id, result=HerBlogs, p=len(HerBlogs))
 
+@app.route('/is_running', methods =["GET", "POST"])
+def is_runnig():
+    root_url = request.url_root
+    developer_url = 'http://127.0.0.1:5000/'
+    if root_url != developer_url:    
+        session.clear()
+    else:
+        print("oikea")
+
+    return root_url
 
 if __name__ == '__main__':
-     app.run(debug=True)
+    app.run(debug=True)
