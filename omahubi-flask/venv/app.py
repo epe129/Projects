@@ -168,8 +168,15 @@ def adminLogin():
 
     return render_template("adminLogin.html", form=form)
 
+class adiminP(FlaskForm):
+    poista  = StringField('poista', validators=[DataRequired()])
+    submit3 = SubmitField('Submit')
+
+# admin can delete user and see all users
 @app.route('/adminPage/<username>/<id>', methods =["GET", "POST"])
 def adminPage(username, id):
+    form = adiminP()
+
     kayttajat = []
     print(username)
     if not session.get("id"):
@@ -183,7 +190,45 @@ def adminPage(username, id):
                 kayttajat.append(d)
     is_runnig()
 
-    return render_template("admin.html", kayttajat=kayttajat)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            poista_id = form.poista.data
+            updated_data = {}
+            updated_data2 = {
+                "tiedot": [
+
+                ]
+            }
+            
+            if poista_id == "":
+                pass
+            else:
+                with open("json.json", "r+") as tiedosto:
+                    data = tiedosto.read()
+                    tiedot = json.loads(data)
+                    for key, value in tiedot.items():
+                        for d in value:
+                            if d["id"] == poista_id:
+                                d.pop("id")
+                                d.pop("Username")
+                                d.pop("Password")
+                            else:
+                                updated_data.update({key : value})
+                
+                for c , s in updated_data.items():
+                    for w in s:
+                        if bool(w) == False:
+                            continue
+                        else:
+                            updated_data2["tiedot"].append(w)
+                                
+                with open('json.json', 'w') as file:
+                    json.dump(updated_data2,file,indent=2)
+        else:
+            return "Error!"
+
+
+    return render_template("admin.html", kayttajat=kayttajat, form=form, username=username, id=id)
 
 
 # page

@@ -18,8 +18,18 @@
             </ol>
         </div>
         <div style="width: 200px; border: 1px solid black; padding: 10px 10px;">
-            <label>Poista Käyttäjä</label>
-            <input type="text">
+            <form action="{{ url_for('adminPage', username=username, id=id,)}}" method="POST">
+                {{ form.hidden_tag() }}
+                <label>Poista Käyttäjä</label>
+                <br>
+                <br>
+                <label>Anna id:</label>
+                <br>
+                {{ form.poista() }}
+                <br>
+                <br>
+                {{ form.submit3() }}
+            </form>
         </div>
         
     </div>
