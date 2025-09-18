@@ -86,3 +86,29 @@ function mode() {
         t = 0
     }
 }
+
+function daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
+}
+
+function calenter() {
+    const kuukaudet = ["tammikuu","helmikuu","maaliskuu","huhtikuu","toukokuu","kesäkuu","heinäkuu","elokuu","syyskuu","lokakuu","marraskuu","joulukuu"];
+    const k = new Date();
+    const p = new Date();
+    const v = new Date();
+
+    let paiva = p.getDate();
+    let kk = kuukaudet[k.getMonth()];
+    let paiviaKuukaudessa = daysInMonth(v.getFullYear(), p.getDate());
+    console.log(paiviaKuukaudessa)
+
+    document.getElementById("kuukausi").innerHTML = kk;
+    document.getElementById("vuosi").innerHTML = v.getFullYear();
+
+    document.getElementById(`${paiva}`).style.backgroundColor = "#1abc9c";
+    document.getElementById(`${paiva}`).style.color = "white";
+    document.getElementById(`${paiva}`).style.borderRadius = "5px";
+
+}
+
+calenter()

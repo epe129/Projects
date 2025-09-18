@@ -288,8 +288,6 @@ def logout():
     session.clear()
     return redirect("/")
 
-
-
 # blogs
 @app.route("/blogs/<Username>/<id>")
 def blogs(Username, id):
