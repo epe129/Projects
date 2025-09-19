@@ -100,15 +100,26 @@ function calenter() {
     let paiva = p.getDate();
     let kk = kuukaudet[k.getMonth()];
     let paiviaKuukaudessa = daysInMonth(v.getFullYear(), p.getDate());
-    console.log(paiviaKuukaudessa)
 
+    if (paiviaKuukaudessa == 28) {
+        document.getElementById("29").style.display = "none";
+        document.getElementById("30").style.display = "none";
+        document.getElementById("31").style.display = "none";
+    }
+    if (paiviaKuukaudessa == 29) {
+        document.getElementById("30").style.display = "none";
+        document.getElementById("31").style.display = "none";
+    }
+    if (paiviaKuukaudessa == 30) {
+        document.getElementById("31").style.display = "none";
+    }
+   
     document.getElementById("kuukausi").innerHTML = kk;
     document.getElementById("vuosi").innerHTML = v.getFullYear();
 
     document.getElementById(`${paiva}`).style.backgroundColor = "#1abc9c";
     document.getElementById(`${paiva}`).style.color = "white";
     document.getElementById(`${paiva}`).style.borderRadius = "5px";
-
 }
 
 calenter()

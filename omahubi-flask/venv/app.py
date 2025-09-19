@@ -267,7 +267,7 @@ def page(Username, id):
             file_data = json.load(f)
             for key, value in file_data.items():
                 for a in value:
-                    if a["id"] == id and a["title"] == title and a["text"] == text:
+                    if a["id"] == id and a["title"] == title:
                         title = ""
                         text = ""
             
@@ -293,6 +293,7 @@ def logout():
 def blogs(Username, id):
     HerBlogs = []
     # make it that can delete blog
+
     # retrieves blogs from a json file
     with open("blog.json", "r+") as f:
         file_data = json.load(f)
