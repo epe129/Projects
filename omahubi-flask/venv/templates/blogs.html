@@ -7,11 +7,23 @@
     <title>Your blogs</title>
 </head>
 <body>
-    <h2>Hello {{ Username }}</h2>
-    <h3>See your blogs:</h3>
-    {%for i in result%}
-        <li>id: {{ i["id"] }} title: {{ i["title"] }}<br>text: {{ i["text"] }}</li>
-        <br>
-    {%endfor%}
+    <div class="See-blogs">
+        <h2>Hello {{ Username }}</h2>
+        <h3>See your blogs:</h3>
+        {%for i in result%}
+            <li>id: {{ i["id"] }} title: {{ i["title"] }}<br>text: {{ i["text"] }}</li>
+            <br>
+        {%endfor%}
+    </div>
+
+    <div class="delete-blog">
+        <form action="{{ url_for('blogs', Username=Username, id=id,)}}" method="POST">
+            {{ form.hidden_tag() }}
+            <label id="label">Poista blogi anna otsikko:</label> {{ form.blogin_title() }}
+            <br>
+            {{ form.submit() }}
+        </form>
+    </div>
+    
 </body>
 </html>

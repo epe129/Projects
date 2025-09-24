@@ -258,8 +258,8 @@ def page(Username, id):
         pass
     else:        
         Write_blog = {
-            "id": f"{id}", 
             "title": f"{title}",
+            "id": f"{id}", 
             "text": f"{text}"
         }
         # appends blog in json file
@@ -289,10 +289,51 @@ def logout():
     return redirect("/")
 
 # blogs
-@app.route("/blogs/<Username>/<id>")
+
+class poistablog(FlaskForm):
+    blogin_title  = StringField('blogin_title', validators=[DataRequired()])
+    submit = SubmitField('submit')
+
+@app.route("/blogs/<Username>/<id>", methods =["GET", "POST"])
 def blogs(Username, id):
     HerBlogs = []
-    # make it that can delete blog
+    poista = ""
+    form = poistablog()
+
+    if request.method == "POST":
+        if form.validate_on_submit():
+            poista = form.blogin_title.data
+            updated_data = {}
+            updated_data2 = {
+                "blogit": [
+                ]
+            }
+            if poista == "":
+                pass
+            else:
+                with open("blog.json", "r+") as tiedosto:
+                    data = tiedosto.read()
+                    tiedot = json.loads(data)
+                    for key, value in tiedot.items():
+                        for d in value:
+                            if d["title"] == poista:
+                                d.pop("title")
+                                d.pop("id")
+                                d.pop("text")
+                            else:                  
+                                updated_data.update({key : value})
+                
+                for c , s in updated_data.items():
+                    for w in s:
+                        if bool(w) == False:
+                            continue
+                        else:
+                            updated_data2["blogit"].append(w)
+
+                with open('blog.json', 'w') as file:
+                    json.dump(updated_data2,file,indent=2)
+        else:
+            return "Error!"
 
     # retrieves blogs from a json file
     with open("blog.json", "r+") as f:
@@ -305,7 +346,7 @@ def blogs(Username, id):
                     continue
     is_runnig()
 
-    return render_template("blogs.html", Username=Username, id=id, result=HerBlogs, p=len(HerBlogs))
+    return render_template("blogs.html", Username=Username, id=id, result=HerBlogs, p=len(HerBlogs), form=form)
 
 @app.route('/is_running', methods =["GET", "POST"])
 def is_runnig():
