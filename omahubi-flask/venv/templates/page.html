@@ -8,47 +8,42 @@
 </head>
 <body id="body">
     <!-- After user is log in -->
-    <div class="title">
+    <div style="display: flex; flex-direction: row; float: none; width: 100%;">
         <h1 class="h1"><span id="teksti"></span> {{ Username }}</h1>
-        <p id="userid">Your UserID: {{ id }}</p>   
         <a class="logout" href="{{ url_for('logout') }}">Log out</a>
         <button onclick="mode()" class="mode">Dark mode</button>
-        <div class="divButtons">
-            <button class="d_button" onclick="nayta('todo')" id="todo">Todo</button>
-            <button class="d_button" onclick="nayta('calenter')" id="calenter">Calenter</button>
-            <button class="d_button" onclick="nayta('Write_blog')" id="blogi">Write blog</button>
-            <button class="d_button" id="blogs_button"><a href="{{ url_for('blogs', Username=Username, id=id,) }}" target="_blank" class="blogs_a">See the blogs</a></button>
-        </div>    
+        <button class="d_button" id="blogs_button"><a href="{{ url_for('blogs', Username=Username, id=id,) }}" target="_blank" class="blogs_a">See the blogs</a></button>
     </div>
+
     <div class="main" id="main">
         <!-- todo -->
-        <div class="div" id="tododiv">
-            <div id="todo_inside">
-                <input type="text" name="task" placeholder="Give the task" id="addTask">
-                <input placeholder="delete task" id="DeleteTask">
-                <p id="todo_p">Task is added after enter is pressed</p>
-                <p id="task"></p>
-            </div>
+        <div id="todo_inside">
+            <input type="text" name="task" placeholder="Give the task" id="addTask">
+            <input placeholder="delete task" id="DeleteTask">
+            <p id="todo_p">Task is added after enter is pressed</p>
+            <p id="task"></p>
         </div>
+
+        <br>
         <!-- blogs -->
-        <div class="div" id="blogidiv">
-            <form id="blogForm" action="{{ url_for('page', Username=Username, id=id,)}}" method="post">
-                {{ form.hidden_tag() }}
-                <h3 id="blog_title">Blog</h3>
-                <label id="label">Title:</label> {{ form.title() }}
-                <br>
-                <br>
-                <label id="label">text:</label>
-                <br>
-                {{ form.text() }}
-                <br>
-                {{ form.submit3() }}
-            </form>
-        </div>
+        <form id="blogForm" action="{{ url_for('page', Username=Username, id=id,)}}" method="post">
+            {{ form.hidden_tag() }}
+            <h3 id="blog_title">Blog</h3>
+            <label id="label">Title:</label> {{ form.title() }}
+            <br>
+            <br>
+            <label id="label">text:</label>
+            <br>
+            {{ form.text() }}
+            <br>
+            {{ form.submit3() }}
+        </form>
+
+        <br>
         <!-- calenter haven't started doing yet-->
         <div class="div" id="calenterdiv">    
-            <h5 id="kuukausi" style="font-size: 2rem; margin-bottom: -15px; margin-top: 0px; color: white;"></h5>
-            <h4 id="vuosi" style="font-size: 1rem; margin-bottom: 15px; color: white;"></h4>
+            <h5 id="kuukausi" style="font-size: 2rem; margin-bottom: -15px; margin-top: 0px; text-align: center;"></h5>
+            <h4 id="vuosi" style="font-size: 1rem; margin-bottom: 15px; text-align: center;"></h4>
             <div>
                 <ul class="weekdays">
                     <li>Mo</li>

@@ -300,6 +300,7 @@ def blogs(Username, id):
     poista = ""
     form = poistablog()
 
+    # can delete blog
     if request.method == "POST":
         if form.validate_on_submit():
             poista = form.blogin_title.data

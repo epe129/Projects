@@ -1,23 +1,3 @@
-nayta = (nayttaa) =>{
-    switch (nayttaa) {
-        case "todo":
-            document.getElementById("blogidiv").style.display = "none"
-            document.getElementById("calenterdiv").style.display = "none"
-            document.getElementById("tododiv").style.display = "flex"
-            break;
-        case "Write_blog":
-            document.getElementById("calenterdiv").style.display = "none"
-            document.getElementById("tododiv").style.display = "none"    
-            document.getElementById("blogidiv").style.display = "flex"
-            break;
-        case "calenter":
-            document.getElementById("tododiv").style.display = "none"
-            document.getElementById("blogidiv").style.display = "none"
-            document.getElementById("calenterdiv").style.display = "flex"
-            break;
-    }
-}
-
 const aika = new Date();
 const tunti = aika.getHours();
 let teksti = "";
@@ -28,6 +8,8 @@ if (tunti < 12) {
     teksti = "Good afternoon"
 } else if (tunti >= 18 && tunti < 22) {
     teksti = "Good evening"
+} else {
+    teksti = "Good night"
 }
 
 document.getElementById("teksti").innerHTML = teksti;
