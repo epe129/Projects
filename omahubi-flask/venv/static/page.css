@@ -42,7 +42,6 @@ body {
     border: none; 
     cursor: pointer;
     text-decoration: none;
-    color: black;
 }
 
 /* div that contains buttons */
@@ -72,7 +71,6 @@ body {
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    color: black;
 }
 
 
