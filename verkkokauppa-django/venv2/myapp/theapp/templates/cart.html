@@ -1,9 +1,16 @@
+<!DOCTYPE html>
 {% extends "nav.html" %}
-
-{% block title %}
-{% endblock %}
-
-
-{% block content %}
-  
-{% endblock %}
+<html>
+    <body>
+        {% block content %}
+        <div style="display: flex; flex-direction: column; border: 1px solid black; width: 300px; height: 200px; justify-content: center; margin: 0 auto; margin-top: 10px;">
+            <h1 style="padding: 5px; margin-bottom: 100px; margin-top: -90px;">Cart</h1>      
+            <div style="display: flex; flex-direction: row; margin-top: -100px; width: 100%; height: auto; gap: 55px;">
+                <p>Product</p>
+                <p>Price</p>
+                <p>Quantity</p>
+            </div>
+        </div>
+        {% endblock %}    
+    </body>
+</html>

@@ -1,15 +1,19 @@
 from django.http import HttpResponse
 from django.template import loader
-# Create your views here.
+from django.shortcuts import render
+import json
 
 def main(request):
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render())
+    
+    return render(request, 'index.html')
 
 def products(request):
-    template = loader.get_template('products.html')
-    return HttpResponse(template.render())
+
+    with open('products.json', 'r') as file:
+        data = json.load(file)    
+
+    return render(request, 'products.html',  {"json_data": data})
 
 def cart(request):
-    template = loader.get_template('cart.html')
-    return HttpResponse(template.render())
+
+    return render(request, 'cart.html')

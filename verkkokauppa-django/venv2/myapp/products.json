@@ -1,0 +1,14 @@
+{
+    "products" : [
+        {
+            "kuva" : "/static/img/paita.png",
+            "malli" : "t-shirt",
+            "hinta" : "29.99$"
+        },
+        {
+            "kuva" : "/static/img/jeans.png",
+            "malli" : "jeans",
+            "hinta" : "60$"
+        }
+    ]
+}
