@@ -1,3 +1,5 @@
+# tee login ja rekister jotta oderit pysyy tiedossa
+
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
@@ -8,6 +10,9 @@ def main(request):
     return render(request, 'index.html')
 
 def products(request):
+    ordersdata = ""
+    total_price = 0
+    oders = 0
 
     with open('products.json', 'r') as file:
         data = json.load(file)    
@@ -16,8 +21,9 @@ def products(request):
         orders = request.POST.get("orders") 
         data1 = orders.split()
 
+
         write_oders = {
-            "orderid" : f"{data1[0]}", 
+            "id" : f"{data1[0]}", 
             "malli" : f"{data1[1]}", 
             "hinta" : f"{data1[2]}" 
         }
@@ -26,7 +32,7 @@ def products(request):
             file_data = json.load(f)
             for key, value in file_data.items():
                 for a in value:
-                    if a["orderid"] == orders:
+                    if a["id"] == orders:
                         orders = ""
             
             if orders == "":
@@ -42,12 +48,13 @@ def products(request):
     with open('orders.json', 'r') as file:
         ordersdata = json.load(file)    
     
-    # for keyy, valuee in ordersdata.items():
-    #     for xx in valuee:
-    #         print(xx)
+    for keyy, valuee in ordersdata.items():
+        for xx in valuee:
+            total_price += float(xx["hinta"])
+            oders += 1
 
 
-    return render(request, 'products.html',  {"json_data": data, "o_data": ordersdata})
+    return render(request, 'products.html',  {"json_data": data, "o_data": ordersdata, "total": total_price, "o": oders})
 
 def cart(request):
 

@@ -1,44 +1,29 @@
 {
     "orders": [
         {
-            "orderid": "1",
+            "id": "1",
             "malli": "t-shirt",
-            "hinta": "29.99$"
+            "hinta": "29.99"
         },
         {
-            "orderid": "2",
+            "id": "2",
             "malli": "jeans",
-            "hinta": "60$"
+            "hinta": "60"
         },
         {
-            "orderid": "1",
+            "id": "1",
             "malli": "t-shirt",
-            "hinta": "29.99$"
+            "hinta": "29.99"
         },
         {
-            "orderid": "2",
-            "malli": "jeans",
-            "hinta": "60$"
-        },
-        {
-            "orderid": "1",
+            "id": "1",
             "malli": "t-shirt",
-            "hinta": "29.99$"
+            "hinta": "29.99"
         },
         {
-            "orderid": "2",
-            "malli": "jeans",
-            "hinta": "60$"
-        },
-        {
-            "orderid": "1",
+            "id": "1",
             "malli": "t-shirt",
-            "hinta": "29.99$"
-        },
-        {
-            "orderid": "2",
-            "malli": "jeans",
-            "hinta": "60$"
+            "hinta": "29.99"
         }
     ]
 }

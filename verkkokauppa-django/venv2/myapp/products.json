@@ -3,13 +3,13 @@
         {
             "kuva" : "/static/img/paita.png",
             "malli" : "t-shirt",
-            "hinta" : "29.99$",
+            "hinta" : "29.99",
             "id" : "1"
         },
         {
             "kuva" : "/static/img/jeans.png",
             "malli" : "jeans",
-            "hinta" : "60$",
+            "hinta" : "60",
             "id" : "2"
         }
     ]
