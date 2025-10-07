@@ -7,7 +7,7 @@
         {% endblock %}    
             
         {% block tuotteet %}
-        <div style="display: flex; flex-direction: column; float: right; border: 1px solid black; margin-right: 10px; margin-left: -280px; padding: 20px;">
+        <div id="product" style="display: flex; flex-direction: column; float: right; border: 1px solid black; margin-right: 10px; margin-left: -280px; padding: 20px;">
             <h3 style="margin-top: 0px; margin-bottom: 5px;">Cart</h3>
             <span style="margin-top: 0px; font-size: 0.8rem;"><span>{{ o }}</span> items</span>
             <hr style="width: 100%; margin-bottom: -5px;">
@@ -15,7 +15,7 @@
             <button style="background-color: rgb(0, 145, 255); color: white; border: none; border-radius: 5px; padding: 5px 10px;">Checkout</button>
         </div>
 
-        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 0 auto; width: 50%; gap: 10px;">
+        <div id="cart" style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 0 auto; width: 50%; gap: 10px;">
         {% for key, value in json_data.items %}
             {% for x in value %}
                 <div style="display: flex; flex-direction: column; border: 1px solid black; width: 75px; padding: 20px; border-radius: 5px;">
@@ -30,7 +30,33 @@
             {% endfor %}
         {% endfor %} 
         </div>
-        
+
+        {% if onko == False %}
+        <div style="display: flex; flex-direction: column; justify-content: center; margin: 0 auto; margin-top: 40px; position: relative; width: 300px; height: 300px; padding: 15px 15px 15px 15px; border-radius: 5px; background-color: #f0f4f8;">
+            <h3 style="color: black; font-size: 1.5rem; text-align: center;">Give your order id</h3>
+            <div style="display: flex; flex-direction: column; justify-content: center; margin: 0 auto;">
+                <form action="" method="post" style="display: flex; flex-direction: column; justify-content: center; margin: 0 auto;">
+                    {% csrf_token %}
+                    <label style="color: black;">Your order id:</label>
+                    <input style="width: 150px;" type="text" id="Oid" name="Oid" required>
+                </form>
+            </div>
+            <p style="color: black; text-align: center; font-size: 0.8rem;">Can be what ever you want</p>
+        </div>
+        <script>
+        document.getElementById("product").style.display = "none";
+        document.getElementById("cart").style.display = "none";
+        document.body.style.background = "linear-gradient(to right, #dbeafe, #e0f2fe)"
+        </script>
+        {% endif %} 
+
+        {% if onko == True %}
+        <script>
+        document.getElementById("product").style.display = "flex";
+        document.getElementById("cart").style.display = "flex";
+        document.body.style.background = "white"
+        </script>
+        {% endif %} 
         {% endblock %}
     </body>
 </html>

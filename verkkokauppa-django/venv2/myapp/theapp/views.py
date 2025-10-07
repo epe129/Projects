@@ -5,9 +5,22 @@ from django.template import loader
 from django.shortcuts import render
 import json
 
+# make the orderid work
+global isOrderId 
+isOrderId = False
+
+theOrderid = []
+
 def main(request):
+    orderid = ""
+
+    if "Oid" in request.POST:
+        orderid = request.POST.get("Oid") 
+        global isOrderId 
+        isOrderId = True
+        print(orderid)
     
-    return render(request, 'index.html')
+    return render(request, 'index.html', {"onko": isOrderId})
 
 def products(request):
     ordersdata = ""
@@ -54,8 +67,8 @@ def products(request):
             oders += 1
 
 
-    return render(request, 'products.html',  {"json_data": data, "o_data": ordersdata, "total": total_price, "o": oders})
+    return render(request, 'products.html',  {"json_data": data, "o_data": ordersdata, "total": total_price, "o": oders, "onko": isOrderId})
 
 def cart(request):
 
-    return render(request, 'cart.html')
+    return render(request, 'cart.html', {"onko": isOrderId})
