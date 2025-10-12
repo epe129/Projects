@@ -11,33 +11,6 @@
                 <p>Quantity</p>
             </div>
         </div>
-
-        {% if onko == False %}
-        <div style="display: flex; flex-direction: column; justify-content: center; margin: 0 auto; margin-top: 40px; position: relative; width: 300px; height: 300px; padding: 15px 15px 15px 15px; border-radius: 5px; background-color: #f0f4f8;">
-            <h3 style="color: black; font-size: 1.5rem; text-align: center;">Give your order id</h3>
-            <div style="display: flex; flex-direction: column; justify-content: center; margin: 0 auto;">
-                <form action="" method="post" style="display: flex; flex-direction: column; justify-content: center; margin: 0 auto;">
-                    {% csrf_token %}
-                    <label style="color: black;">Your order id:</label>
-                    <input style="width: 150px;" type="text" id="Oid" name="Oid" required>
-                </form>
-            </div>
-            <p style="color: black; text-align: center; font-size: 0.8rem;">Can be what ever you want</p>
-        </div>
-        <script>
-        document.getElementById("d").style.display = "none";
-        // document.getElementById("main").style.display = "none";
-        document.body.style.background = "linear-gradient(to right, #dbeafe, #e0f2fe)"
-        </script>
-        {% endif %} 
-
-        {% if onko == True %}
-        <script>
-        document.getElementById("d").style.display = "flex";
-        // document.getElementById("main").style.display = "flex";
-        document.body.style.background = "white"
-        </script>
-        {% endif %} 
-        {% endblock %}    
+        {% endblock %}
     </body>
 </html>
