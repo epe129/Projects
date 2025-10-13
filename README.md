@@ -7,4 +7,4 @@ still in development.
 
 # verkkokauppa-django
 
-The verkkokauppa-django file contains a django project where the user can log in, register, view products, add products to cart, and make orders. still in development.
+The verkkokauppa-django file contains a django project where the user can view products, add products to cart, and make orders. still in development.
