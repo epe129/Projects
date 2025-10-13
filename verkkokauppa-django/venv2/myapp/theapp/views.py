@@ -23,6 +23,7 @@ def products(request):
     ordersdata = {}
     total_price = 0
     oders = 0
+    orderid = ""
     
     if len(theid) > 0: 
         orderid = theid[0]
@@ -58,14 +59,25 @@ def products(request):
         ordersdata = json.load(file)    
     
     for keyy, valuee in ordersdata.items():
-        for xx in valuee:
-            total_price += float(xx["hinta"])
-            oders += 1
+        if orderid in keyy:
+            for xx in valuee:
+                total_price += float(xx["hinta"])
+                oders += 1
 
     return render(request, 'products.html',  {"json_data": data, "o_data": ordersdata, "total": total_price, "o": oders})
 
+# tee cart loppuun
 def cart(request):
+    orderid = ""
     if len(theid) > 0: 
-        orderid = theid[0]
-    
+        orderid = theid[0]        
+        
+    with open('orders.json', 'r+') as file:
+        ordersdata = json.load(file)
+            
+        for key, value in ordersdata.items():
+            if orderid in key:
+                for x in value:
+                    print(x)
+
     return render(request, 'cart.html')
