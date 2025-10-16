@@ -1,83 +1,57 @@
-from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
 import json
 
-global isOrderId
-global theid
-theid = [] 
-isOrderId = False
-
 def main(request):
-    orderid = ""
-    global isOrderId
-
-    if "Oid" in request.POST:
-        orderid = request.POST.get("Oid")
-        theid.append(orderid)
-        isOrderId = True
-    
-    return render(request, 'index.html', {"onko": isOrderId})
+    return render(request, 'index.html')
 
 def products(request):
-    ordersdata = {}
     total_price = 0
-    oders = 0
-    orderid = ""
-    
-    if len(theid) > 0: 
-        orderid = theid[0]
-    
-    with open('products.json', 'r') as file:
-        data = json.load(file)    
-    
-    if 'orders' in request.POST:
-        orders = request.POST.get("orders") 
-        data1 = orders.split()
+    orders_count = 0
 
-        write_ordes = {
-            "id" : f"{data1[0]}", 
-            "malli" : f"{data1[1]}", 
-            "hinta" : f"{data1[2]}" 
+    with open('products.json', 'r') as file:
+        data = json.load(file)
+
+    if 'orders' in request.POST:
+        orders = request.POST.get("orders")
+        data1 = orders.split() 
+
+        new_order = {
+            "id": data1[0],
+            "malli": data1[1],
+            "hinta": data1[2]
         }
 
-        # appends orders in json file
         with open("orders.json", "r+") as f:
             file_data = json.load(f)
 
-            if orderid not in file_data:
-                file_data[orderid] = []
-                
-            file_data[orderid].append(write_ordes)
+            if "orders" not in file_data:
+                file_data["orders"] = []
+
+            file_data["orders"].append(new_order)
 
             f.seek(0)
             json.dump(file_data, f, indent=4)
             f.truncate()
 
-    
     with open('orders.json', 'r') as file:
-        ordersdata = json.load(file)    
-    
-    for keyy, valuee in ordersdata.items():
-        if orderid in keyy:
-            for xx in valuee:
-                total_price += float(xx["hinta"])
-                oders += 1
+        ordersdata = json.load(file)["orders"]
 
-    return render(request, 'products.html',  {"json_data": data, "o_data": ordersdata, "total": total_price, "o": oders})
+    for item in ordersdata:
+        total_price += float(item["hinta"])
+        orders_count += 1
 
-# tee cart loppuun
+    return render(request, 'products.html', {"json_data": data, "total": total_price, "o": orders_count})
+
 def cart(request):
-    orderid = ""
-    if len(theid) > 0: 
-        orderid = theid[0]        
-        
-    with open('orders.json', 'r+') as file:
-        ordersdata = json.load(file)
-            
-        for key, value in ordersdata.items():
-            if orderid in key:
-                for x in value:
-                    print(x)
 
-    return render(request, 'cart.html')
+    with open('orders.json', 'r') as file:
+        ordersdata = json.load(file)
+    
+        for key, value in ordersdata.items(): 
+            for x in value: 
+                print(x["id"])
+                print(x["malli"])
+                print(x["hinta"])
+
+    return render(request, 'cart.html', {"orders": ordersdata})
