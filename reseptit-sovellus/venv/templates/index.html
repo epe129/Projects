@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <style>
+        .main {
+            display: block;
+            margin: 0px auto;
+            height: 100%;
+            width: 270px;
+        }
+
+        #Search {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        #ul {
+            position: absolute;
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 0px;
+            float: left;
+            background-color: rgb(244, 244, 244);
+        }
+
+        #ul li {
+            list-style-type: none;
+            color: black;
+            padding: 5px;
+            cursor: pointer;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="main" id="main">
+        
+        <h1 style="text-align: center;">Recepies</h1>
+
+        <div style="text-align: center;">
+            <input id="Search" type="text" placeholder="Search recipes">
+            <button id="add">Add recipes</button>
+        </div>
+        
+        <div style="display: block; margin-top: 10px; margin-right: -30px; float: right; width: 200px; height: auto; font-size: 1rem;">
+            {%for i in r%}
+            <div style="width: 200px; height: auto; border-radius: 5px; padding: 0px 5px 5px 5px; background-color: rgb(226, 226, 226); color: black;">
+                <h4 style="margin-bottom: 0px;">{{ i.title }}</h4>
+                <p style="font-size: 0.8rem; margin-bottom: 5px;">{{ i.description }}</p>
+                <p style="font-size: 0.8rem; margin-bottom: 5px;">{{ i.cooking_time }}</p>
+                <a href="{{ url_for('recepies_page', id=i.id ) }}" target="_blank" style="color: black; font-size: 1rem; cursor: pointer; text-decoration: none; background-color: rgb(179, 179, 179); border-radius: 5px; padding: 2px;">Katso resepti</a>
+            </div>
+            {%endfor%}
+        </div>
+
+        <br>
+        
+        <ul id="ul">
+            <li>All</li>
+            <li>Breakfast</li>
+            <li>Lunch</li>
+            <li>Dinner</li>
+            <li>Dessert</li>
+        </ul>
+
+    </div>
+</body>
+</html>
