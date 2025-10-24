@@ -43,7 +43,7 @@
 
         <div style="text-align: center;">
             <input id="Search" type="text" placeholder="Search recipes">
-            <button id="add">Add recipes</button>
+            <button id="add" onclick="add()">Add recipes</button>
         </div>
         
         <div style="display: block; margin-top: 10px; margin-right: -30px; float: right; width: 200px; height: auto; font-size: 1rem;">
@@ -68,5 +68,46 @@
         </ul>
 
     </div>
+
+    <div id="adddiv">
+        <form action="{{ url_for('recepies_page', id=id)}}" method="post" name="add">
+            <h3>Lisää resepti</h3>
+
+            <input type="text" name="title" placeholder="Otsikko" required>
+            <textarea name="description" placeholder="Kuvaus"></textarea>
+            <input type="number" name="cooking_time" placeholder="Valmistusaika (min)">
+            <input type="number" name="servings" placeholder="Annosmäärä">
+            <input type="text" name="category" placeholder="Kategoria">
+            <input type="text" name="image_url" placeholder="Kuvan URL">
+
+            <h4>Ainesosat</h4>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_1" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_1" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_2" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_2" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_3" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_3" placeholder="Määrä">
+            </div>
+
+            <button type="submit">Tallenna resepti</button>
+        </form>
+    </div>
+
+    <script>
+        let t = 0
+
+        function add() {
+            if (t == 1) {
+
+            } else {
+                
+            }
+        }
+    </script>
 </body>
 </html>
