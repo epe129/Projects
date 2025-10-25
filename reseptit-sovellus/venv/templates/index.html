@@ -33,17 +33,43 @@
             padding: 5px;
             cursor: pointer;
         }
+
+       #ADDdiv {
+        display: none; 
+        position: fixed;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; 
+        color: white;
+
+    }
+    
+    #ADDdiv form {
+        background-color: rgba(0, 0, 0, 0.8); 
+        width: 50%;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #firstdDIV {
+    text-align: center;
+    }
        
     </style>
 </head>
 <body>
     <div class="main" id="main">
         
-        <h1 style="text-align: center;">Recepies</h1>
+        <h1>Recepies</h1>
 
-        <div style="text-align: center;">
+        <div id="firstdDIV">
             <input id="Search" type="text" placeholder="Search recipes">
-            <button id="add" onclick="add()">Add recipes</button>
+            <button id="add" onclick="myadd()">Add recipes</button>
         </div>
         
         <div style="display: block; margin-top: 10px; margin-right: -30px; float: right; width: 200px; height: auto; font-size: 1rem;">
@@ -69,16 +95,35 @@
 
     </div>
 
-    <div id="adddiv">
+    <div id="ADDdiv">
         <form action="{{ url_for('recepies_page', id=id)}}" method="post" name="add">
             <h3>Lisää resepti</h3>
 
             <input type="text" name="title" placeholder="Otsikko" required>
+            
+            <br>
+            <br>
+
             <textarea name="description" placeholder="Kuvaus"></textarea>
+            
+            <br>
+            <br>
+            
             <input type="number" name="cooking_time" placeholder="Valmistusaika (min)">
+            
+            <br>
+            <br>
+
             <input type="number" name="servings" placeholder="Annosmäärä">
+            
+            <br>
+            <br>
+
             <input type="text" name="category" placeholder="Kategoria">
-            <input type="text" name="image_url" placeholder="Kuvan URL">
+            
+            <br>
+
+            <!-- <input type="text" name="image_url" placeholder="Kuvan URL"> -->
 
             <h4>Ainesosat</h4>
             <div class="ingredient">
@@ -93,21 +138,40 @@
                 <input type="text" name="ingredient_name_3" placeholder="Ainesosan nimi">
                 <input type="text" name="ingredient_amount_3" placeholder="Määrä">
             </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_4" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_4" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_5" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_5" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_6" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_6" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_7" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_7" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_8" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_8" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_9" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_9" placeholder="Määrä">
+            </div>
+            <div class="ingredient">
+                <input type="text" name="ingredient_name_10" placeholder="Ainesosan nimi">
+                <input type="text" name="ingredient_amount_10" placeholder="Määrä">
+            </div>
+            <br>
 
             <button type="submit">Tallenna resepti</button>
         </form>
     </div>
 
-    <script>
-        let t = 0
-
-        function add() {
-            if (t == 1) {
-
-            } else {
-                
-            }
-        }
-    </script>
+    <script src="/static/js/index.js" charset="utf-8"></script>
 </body>
 </html>

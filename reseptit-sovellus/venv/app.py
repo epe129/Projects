@@ -14,8 +14,43 @@ def index():
                 r.append(result)
 
     if request.method == "POST":
-        print("moi") 
-    
+        title = request.form.get("title")
+        description = request.form.get("description")
+        cooking_time = request.form.get("cooking_time")
+        servings = request.form.get("servings")
+        category = request.form.get("category")
+ 
+        ingredient_name_1 = request.form.get("ingredient_name_1")
+        ingredient_amount_1 = request.form.get("ingredient_amount_1")
+ 
+        ingredient_name_2 = request.form.get("ingredient_name_2")
+        ingredient_amount_2 = request.form.get("ingredient_amount_2")
+ 
+        ingredient_name_3 = request.form.get("ingredient_name_3")
+        ingredient_amount_3 = request.form.get("ingredient_amount_3")
+ 
+        ingredient_name_4 = request.form.get("ingredient_name_4")
+        ingredient_amount_4 = request.form.get("ingredient_amount_4")
+ 
+        ingredient_name_5 = request.form.get("ingredient_name_5")
+        ingredient_amount_5 = request.form.get("ingredient_amount_5")
+ 
+        ingredient_name_6 = request.form.get("ingredient_name_6")
+        ingredient_amount_6 = request.form.get("ingredient_amount_6")
+ 
+        ingredient_name_7 = request.form.get("ingredient_name_7")
+        ingredient_amount_7 = request.form.get("ingredient_amount_7")
+ 
+        ingredient_name_8 = request.form.get("ingredient_name_8")
+        ingredient_amount_8 = request.form.get("ingredient_amount_8")
+ 
+        ingredient_name_9 = request.form.get("ingredient_name_9")
+        ingredient_amount_9 = request.form.get("ingredient_amount_9")
+ 
+        ingredient_name_10 = request.form.get("ingredient_name_10")
+        ingredient_amount_10 = request.form.get("ingredient_amount_10")
+ 
+        
     return render_template("index.html", r=r)
 
 @app.route('/recepies/<id>', methods=['GET', "POST"])
