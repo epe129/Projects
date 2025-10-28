@@ -42,23 +42,22 @@
         align-items: center;
         z-index: 1000; 
         color: white;
-
-    }
+        }
     
-    #ADDdiv form {
-        background-color: rgba(0, 0, 0, 0.8); 
-        width: 50%;
-        padding: 20px;
-        border-radius: 10px;
-    }
+        #ADDdiv form {
+            background-color: rgba(0, 0, 0, 0.8); 
+            width: 50%;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-    h1 {
-        text-align: center;
-    }
+        h1 {
+            text-align: center;
+        }
 
-    #firstdDIV {
-    text-align: center;
-    }
+        #firstdDIV {
+            text-align: center;
+        }
        
     </style>
 </head>
@@ -96,7 +95,7 @@
     </div>
 
     <div id="ADDdiv">
-        <form action="{{ url_for('recepies_page', id=id)}}" method="post" name="add">
+        <form action="{{ url_for('index')}}" method="post" name="add">
             <h3>Lisää resepti</h3>
 
             <input type="text" name="title" placeholder="Otsikko" required>

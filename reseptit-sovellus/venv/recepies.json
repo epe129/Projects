@@ -19,6 +19,7 @@
       "category": "Lounas",
       "image_url": "images/kanapasta.jpg"
     },
+
     {
       "id": 2,
       "title": "Suklaabrownie",
@@ -37,5 +38,7 @@
       "category": "Jälkiruoka",
       "image_url": "images/brownie.jpg"
     }
+
   ]
+  
 }

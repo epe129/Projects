@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', "POST"])
 def index():
     r = []
+    ingredients = []
 
     with open("recepies.json", "r+") as f:
         file_data = json.load(f)
@@ -22,34 +23,74 @@ def index():
  
         ingredient_name_1 = request.form.get("ingredient_name_1")
         ingredient_amount_1 = request.form.get("ingredient_amount_1")
- 
+
+        ingredients.append({ingredient_name_1 : ingredient_amount_1})
+
         ingredient_name_2 = request.form.get("ingredient_name_2")
         ingredient_amount_2 = request.form.get("ingredient_amount_2")
+        
+        ingredients.append({ingredient_name_2 : ingredient_amount_2})
  
         ingredient_name_3 = request.form.get("ingredient_name_3")
         ingredient_amount_3 = request.form.get("ingredient_amount_3")
- 
+        
+        ingredients.append({ingredient_name_3 : ingredient_amount_3})
+
         ingredient_name_4 = request.form.get("ingredient_name_4")
         ingredient_amount_4 = request.form.get("ingredient_amount_4")
+        
+        ingredients.append({ingredient_name_4 : ingredient_amount_4})
  
         ingredient_name_5 = request.form.get("ingredient_name_5")
         ingredient_amount_5 = request.form.get("ingredient_amount_5")
+        
+        ingredients.append({ingredient_name_5 : ingredient_amount_5})
  
         ingredient_name_6 = request.form.get("ingredient_name_6")
         ingredient_amount_6 = request.form.get("ingredient_amount_6")
+        
+        ingredients.append({ingredient_name_6 : ingredient_amount_6})
  
         ingredient_name_7 = request.form.get("ingredient_name_7")
         ingredient_amount_7 = request.form.get("ingredient_amount_7")
+        
+        ingredients.append({ingredient_name_7 : ingredient_amount_7})
  
         ingredient_name_8 = request.form.get("ingredient_name_8")
         ingredient_amount_8 = request.form.get("ingredient_amount_8")
- 
+        
+        ingredients.append({ingredient_name_8 : ingredient_amount_8})
+
         ingredient_name_9 = request.form.get("ingredient_name_9")
         ingredient_amount_9 = request.form.get("ingredient_amount_9")
+        
+        ingredients.append({ingredient_name_9 : ingredient_amount_9})
  
         ingredient_name_10 = request.form.get("ingredient_name_10")
         ingredient_amount_10 = request.form.get("ingredient_amount_10")
- 
+        
+        ingredients.append({ingredient_name_10 : ingredient_amount_10})
+
+        print(title, description, cooking_time, servings, category, ingredients)
+        
+        recepies = {
+            "id": 3,
+            "title": title,
+            "description": description,
+            "ingredients": [],
+            "cooking_time": cooking_time,
+            "servings": servings,
+            "category": category,
+        }
+        
+
+        # with open("recepies.json", "r+") as f:
+        #     file_data = json.load(f)
+
+        #     file_data["recipes"].append(recepies)
+            
+        #     json.dump(file_data, f, indent=4)
+
         
     return render_template("index.html", r=r)
 
