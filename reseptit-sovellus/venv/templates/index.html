@@ -77,7 +77,7 @@
                 <h4 style="margin-bottom: 0px;">{{ i.title }}</h4>
                 <p style="font-size: 0.8rem; margin-bottom: 5px;">{{ i.description }}</p>
                 <p style="font-size: 0.8rem; margin-bottom: 5px;">{{ i.cooking_time }}</p>
-                <a href="{{ url_for('recepies_page', id=i.id ) }}" target="_blank" style="color: black; font-size: 1rem; cursor: pointer; text-decoration: none; background-color: rgb(179, 179, 179); border-radius: 5px; padding: 2px;">Katso resepti</a>
+                <a href="{{ url_for('recepies_page', title=i.title ) }}" target="_blank" style="color: black; font-size: 1rem; cursor: pointer; text-decoration: none; background-color: rgb(179, 179, 179); border-radius: 5px; padding: 2px;">Katso resepti</a>
             </div>
             {%endfor%}
         </div>
@@ -103,22 +103,22 @@
             <br>
             <br>
 
-            <textarea name="description" placeholder="Kuvaus"></textarea>
+            <textarea name="description" placeholder="Kuvaus" required></textarea>
             
             <br>
             <br>
             
-            <input type="number" name="cooking_time" placeholder="Valmistusaika (min)">
-            
-            <br>
-            <br>
-
-            <input type="number" name="servings" placeholder="Annosmäärä">
+            <input type="number" name="cooking_time" placeholder="Valmistusaika (min)" required>
             
             <br>
             <br>
 
-            <input type="text" name="category" placeholder="Kategoria">
+            <input type="number" name="servings" placeholder="Annosmäärä" required>
+            
+            <br>
+            <br>
+
+            <input type="text" name="category" placeholder="Kategoria" required>
             
             <br>
 

@@ -1,44 +1,121 @@
 {
-  "recipes": [
-    {
-      "id": 1,
-      "title": "Kermainen kanapasta",
-      "description": "Helppo ja maukas pastaruoka, jossa yhdistyy kerma, kana ja valkosipuli.",
-      "ingredients": [
-        {"name": "Kanafilee", "amount": "300 g"},
-        {"name": "Pasta", "amount": "200 g"},
-        {"name": "Kerma", "amount": "2 dl"},
-        {"name": "Sipuli", "amount": "1 kpl"},
-        {"name": "Valkosipuli", "amount": "2 kynttä"},
-        {"name": "Oliiviöljy", "amount": "1 rkl"},
-        {"name": "Suola", "amount": "maun mukaan"},
-        {"name": "Pippuri", "amount": "maun mukaan"}
-      ],
-      "cooking_time": 25,
-      "servings": 2,
-      "category": "Lounas",
-      "image_url": "images/kanapasta.jpg"
-    },
-
-    {
-      "id": 2,
-      "title": "Suklaabrownie",
-      "description": "Mehevä ja suklainen brownie, täydellinen jälkiruoaksi tai kahvihetkeen.",
-      "ingredients": [
-        {"name": "Voi", "amount": "150 g"},
-        {"name": "Tumma suklaa", "amount": "200 g"},
-        {"name": "Sokeri", "amount": "2 dl"},
-        {"name": "Kananmuna", "amount": "3 kpl"},
-        {"name": "Vehnäjauho", "amount": "1,5 dl"},
-        {"name": "Kaakaojauhe", "amount": "0,5 dl"},
-        {"name": "Suola", "amount": "1/4 tl"}
-      ],
-      "cooking_time": 35,
-      "servings": 8,
-      "category": "Jälkiruoka",
-      "image_url": "images/brownie.jpg"
-    }
-
-  ]
-  
+    "recipes": [
+        {
+            "title": "Kermainen kanapasta",
+            "description": "Helppo ja maukas pastaruoka, jossa yhdistyy kerma, kana ja valkosipuli.",
+            "ingredients": [
+                {
+                    "name": "Kanafilee",
+                    "amount": "300 g"
+                },
+                {
+                    "name": "Pasta",
+                    "amount": "200 g"
+                },
+                {
+                    "name": "Kerma",
+                    "amount": "2 dl"
+                },
+                {
+                    "name": "Sipuli",
+                    "amount": "1 kpl"
+                },
+                {
+                    "name": "Valkosipuli",
+                    "amount": "2 kynttä"
+                },
+                {
+                    "name": "Oliiviöljy",
+                    "amount": "1 rkl"
+                },
+                {
+                    "name": "Suola",
+                    "amount": "maun mukaan"
+                },
+                {
+                    "name": "Pippuri",
+                    "amount": "maun mukaan"
+                }
+            ],
+            "cooking_time": 25,
+            "servings": 2,
+            "category": "Lounas"
+        },
+        {
+            "title": "Suklaabrownie",
+            "description": "Mehevä ja suklainen brownie, täydellinen jälkiruoaksi tai kahvihetkeen.",
+            "ingredients": [
+                {
+                    "name": "Voi",
+                    "amount": "150 g"
+                },
+                {
+                    "name": "Tumma suklaa",
+                    "amount": "200 g"
+                },
+                {
+                    "name": "Sokeri",
+                    "amount": "2 dl"
+                },
+                {
+                    "name": "Kananmuna",
+                    "amount": "3 kpl"
+                },
+                {
+                    "name": "Vehnäjauho",
+                    "amount": "1,5 dl"
+                },
+                {
+                    "name": "Kaakaojauhe",
+                    "amount": "0,5 dl"
+                },
+                {
+                    "name": "Suola",
+                    "amount": "1/4 tl"
+                }
+            ],
+            "cooking_time": 35,
+            "servings": 8,
+            "category": "Jälkiruoka"
+        },
+        {
+            "title": "moi",
+            "description": "dsa",
+            "ingredients": [
+                {
+                    "sad": "1"
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                },
+                {
+                    "": ""
+                }
+            ],
+            "cooking_time": "1",
+            "servings": "1",
+            "category": "1"
+        }
+    ]
 }

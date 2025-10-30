@@ -71,10 +71,7 @@ def index():
         
         ingredients.append({ingredient_name_10 : ingredient_amount_10})
 
-        print(title, description, cooking_time, servings, category, ingredients)
-        
         recepies = {
-            "id": 3,
             "title": title,
             "description": description,
             "ingredients": [],
@@ -82,27 +79,36 @@ def index():
             "servings": servings,
             "category": category,
         }
+
+        for c in ingredients:
+            recepies["ingredients"].append(c)
         
-
-        # with open("recepies.json", "r+") as f:
-        #     file_data = json.load(f)
-
-        #     file_data["recipes"].append(recepies)
+        for existing in r:
+            if existing["title"].lower() == title.lower():
+                print("⚠️ Reseptiä ei lisätty – sama otsikko löytyy jo.")
+                break
             
-        #     json.dump(file_data, f, indent=4)
-
+        if not title or not description or not cooking_time or not servings or not category:
+            print("⚠️ Reseptiä ei lisätty – jokin kenttä puuttuu.")
+        else:
+            with open("recepies.json", "r+") as f:
+                file_data = json.load(f)
+                file_data["recipes"].append(recepies)
+                f.seek(0)
+                json.dump(file_data, f, indent=4, ensure_ascii=False)
+        
         
     return render_template("index.html", r=r)
 
-@app.route('/recepies/<id>', methods=['GET', "POST"])
-def recepies_page(id):
+@app.route('/recepies/<title>', methods=['GET', "POST"])
+def recepies_page(title):
     resepti = []
 
     with open("recepies.json", "r+") as f:
         file_data = json.load(f)
         for key, value in file_data.items():
             for result in value:
-                if str(id) in str(result["id"]):
+                if str(title) in str(result["title"]):
                     resepti.append(result)
 
     return render_template("recepies.html", r=resepti)
