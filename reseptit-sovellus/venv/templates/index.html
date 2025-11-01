@@ -73,7 +73,7 @@
         
         <div style="display: block; margin-top: 10px; margin-right: -30px; float: right; width: 200px; height: auto; font-size: 1rem;">
             {%for i in r%}
-            <div style="width: 200px; height: auto; border-radius: 5px; padding: 0px 5px 5px 5px; background-color: rgb(226, 226, 226); color: black;">
+            <div class="recipe-card" data-category="{{ i.category }}" style="width: 200px; height: auto; border-radius: 5px; padding: 0px 5px 5px 5px; background-color: rgb(226, 226, 226); color: black;">
                 <h4 style="margin-bottom: 0px;">{{ i.title }}</h4>
                 <p style="font-size: 0.8rem; margin-bottom: 5px;">{{ i.description }}</p>
                 <p style="font-size: 0.8rem; margin-bottom: 5px;">{{ i.cooking_time }}</p>
@@ -121,8 +121,6 @@
             <input type="text" name="category" placeholder="Kategoria" required>
             
             <br>
-
-            <!-- <input type="text" name="image_url" placeholder="Kuvan URL"> -->
 
             <h4>Ainesosat</h4>
             <div class="ingredient">

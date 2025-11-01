@@ -39,7 +39,7 @@
             ],
             "cooking_time": 25,
             "servings": 2,
-            "category": "Lounas"
+            "category": "Lunch"
         },
         {
             "title": "Suklaabrownie",
@@ -76,7 +76,7 @@
             ],
             "cooking_time": 35,
             "servings": 8,
-            "category": "Jälkiruoka"
+            "category": "Dessert"
         },
         {
             "title": "moi",
@@ -115,7 +115,7 @@
             ],
             "cooking_time": "1",
             "servings": "1",
-            "category": "1"
+            "category": "Dinner"
         }
     ]
 }
