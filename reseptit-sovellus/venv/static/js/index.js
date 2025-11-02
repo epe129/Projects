@@ -33,3 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.getElementById("Search").addEventListener("search", myFunction);
+
+function myFunction() {
+    const search = document.getElementById("Search");
+    const reseptidiv = document.querySelectorAll(".recipe-card");
+    
+    reseptidiv.forEach(card => {
+        const ruokatitle = card.dataset.title.toLowerCase();                    
+
+        if (ruokatitle === search.value.toLowerCase()) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+        
+    });
+}
