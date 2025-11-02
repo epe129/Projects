@@ -108,7 +108,7 @@ def recepies_page(title):
         file_data = json.load(f)
         for key, value in file_data.items():
             for result in value:
-                if str(title) in str(result["title"]):
+                if str(title) == str(result["title"]):
                     resepti.append(result)
 
     return render_template("recepies.html", r=resepti)
