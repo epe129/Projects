@@ -3,14 +3,31 @@
 <html>
     <body>
         {% block content %}
-        <div id="d" style="display: flex; flex-direction: column; border: 1px solid black; width: 300px; height: 200px; justify-content: center; margin: 0 auto; margin-top: 10px;">    
-            <h1 style="padding: 5px; margin-bottom: 100px; margin-top: -90px;">Cart</h1>      
-            <div style="display: flex; flex-direction: row; margin-top: -100px; width: 100%; height: auto; gap: 55px;">
-                <p>Product</p>
-                <p>Price</p>
-                <p>Quantity</p>
+        <h1 style="padding: 5px; text-align: center; margin-top: -50px;">Cart</h1>
+        <div id="d" style="display: flex; flex-direction: row; border: 1px solid black; width: 300px; height: 200px; justify-content: center; margin: 0 auto; margin-top: 10px; text-align: center;">                
+            
+            <div style="display: flex; flex-direction: column; margin-top: 0px; width: 100%; height: auto;">
+                <h2>Product</h2>
+                {% for item in cart.values %}
+                <p>{{ item.malli }}</p>
+                {% endfor %}
             </div>
+
+            <div style="display: flex; flex-direction: column; margin-top: 0px; width: 100%; height: auto;">
+                <h2>Price</h2>
+                {% for item in cart.values %}
+                <p>{{ item.hinta }}$</p>
+                {% endfor %}            
+            </div>
+            
+            <div style="display: flex; flex-direction: column; margin-top: 0px; width: 100%; height: auto;">
+                <h2>Quantity</h2>
+                {% for item in cart.values %}
+                <p>{{ item.maara }}</p>
+                {% endfor %}
+            </div>        
         </div> 
+        <h3 style="text-align: center; margin-top: 0px;">Total: {{ total }}$</h3>
         {% endblock %}
     </body>
 </html>

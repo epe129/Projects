@@ -44,14 +44,23 @@ def products(request):
     return render(request, 'products.html', {"json_data": data, "total": total_price, "o": orders_count})
 
 def cart(request):
+    orders = {}
 
     with open('orders.json', 'r') as file:
         ordersdata = json.load(file)
     
         for key, value in ordersdata.items(): 
             for x in value: 
-                print(x["id"])
-                print(x["malli"])
-                print(x["hinta"])
+                id = x["id"]
+                if id not in orders:
+                    orders[id] = {
+                        "malli": x["malli"],
+                        "hinta": float(x["hinta"]),
+                        "maara": 1
+                    }
+                else:
+                    orders[id]["maara"] += 1
+    
+    total_price = sum(i["hinta"] * i["maara"] for i in orders.values())
 
-    return render(request, 'cart.html', {"orders": ordersdata})
+    return render(request, 'cart.html', {"cart": orders, "total": total_price})

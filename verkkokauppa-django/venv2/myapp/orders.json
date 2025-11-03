@@ -16,9 +16,9 @@
             "hinta": "60"
         },
         {
-            "id": "1",
-            "malli": "t-shirt",
-            "hinta": "29.99"
+            "id": "2",
+            "malli": "jeans",
+            "hinta": "60"
         },
         {
             "id": "2",
@@ -26,9 +26,9 @@
             "hinta": "60"
         },
         {
-            "id": "1",
-            "malli": "t-shirt",
-            "hinta": "29.99"
+            "id": "2",
+            "malli": "jeans",
+            "hinta": "60"
         },
         {
             "id": "2",
@@ -36,9 +36,9 @@
             "hinta": "60"
         },
         {
-            "id": "1",
-            "malli": "t-shirt",
-            "hinta": "29.99"
+            "id": "2",
+            "malli": "jeans",
+            "hinta": "60"
         }
     ]
 }
