@@ -26,7 +26,7 @@ function clickt(merkki) {
     
     if (isNaN(merkki) == true && merkki.length > 0  && merkki != "=" && merkki != "." && sisaltaako == false) {
         merkit.push(merkki);   
-        nayta.innerHTML += merkki;
+        nayta.innerHTML += " " + merkki + " ";
     }
 
     if (merkki == "c"){
