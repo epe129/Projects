@@ -1,3 +1,4 @@
+// defaultcase jos ei oo välimerkkiä
 let merkit = [];
 let sama = "";
 let valimerkki;
