@@ -1,3 +1,14 @@
+.otsikko {
+    text-align: center;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
 .content {
     display: flex;
     flex-direction: row;
@@ -13,8 +24,9 @@
 .nayta {
     margin-top: 10px;
     margin-left: 14px;
-    width: 136px;
-    height: 30px;
+    min-height: 30px;
+    width: 100%;
+    height: 100%;
     padding: 5px;
     background-color: grey;
     color: white;
@@ -37,14 +49,14 @@
     background-color: gray;
     color: white;
     width: 44px;
-    height: 35px;
+    height: 39.8px;
     margin: 3px;
     padding: 0;
     cursor: pointer;
 }
 
 .merkki_numero {
-    width: 44px;
+    width: 42px;
     padding: 10px 10px 10px 10px;
     margin: 2px;
     border: 1px solid black;
@@ -56,10 +68,6 @@
 .numerot {
     position: absolute;
     margin-top: 70px;
-    margin-left: 21px;
-    margin-right: 79px;
-    margin-bottom: 0;
-    left: 0;
-    right: 0;
+    margin-left: 12px;
     width: 160px;
 }
