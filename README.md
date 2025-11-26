@@ -9,4 +9,7 @@ still in development.
 
 The verkkokauppa-django file contains a django project where the user can view products, add products to cart, and make orders. still in development.
 
-# Calculator
+# And contains some some small projects like:
+ - Calculator
+ - todo-app
+ 
