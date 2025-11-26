@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todoapp</title>
+    <style>
+        #div{
+            margin: auto;
+            width: 50%;
+            height: 80%;
+
+        }
+        li{
+            list-style-type: circle;
+        }
+        #lista{
+            margin: auto;            
+            width: 60%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="div">
+        <h1>Todoapp</h1>
+        <div>
+            <form action="{{ url_for('main') }}" method="POST">
+                Lisää tehtävä: <input type="text" name="todoitem" id="">
+                <button type="text">Lisää</button>
+                
+            </form>
+            <br>
+            <form action="{{ url_for('poista') }}" method="POST">
+                Poista tehtävä: <input type="text" name="deleteitem" id="">
+                <button type="text">Poista</button>
+            </form>
+        </div>
+        <hr>
+        <div id="lista">
+            {%for i in range(pituus)%}
+            <div style="display:flex; padding: 5px 15px;">
+                <li style="padding: 1px 15px;">{{ lukee[i] }}</li>
+            </div>
+            {%endfor%}
+
+            {% block content %}
+            
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
