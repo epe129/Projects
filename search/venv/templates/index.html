@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4>hae jotain wikipediasta yhdellä sanalla esim, suomi tai tietokone</h4>
+    <form action="{{ url_for('search')}}" method="post">
+        <input type="text" name="hae" placeholder="hae">
+    </form>
+    <h3>Vastaus sanaasi</h3>
+    
+    <div style="color: black; font-weight: 900;">
+        {{ vastaus }}
+    </div>
+</body>
+</html>
