@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <title>Peruslaskuja</title>
+</head>
+<body>
+    <div class="container">
+        <h3 class="h3">plus-, miinus-, jako- ja kertolaskuja</h3>
+        
+        <button onclick="location.reload();" class="btn btn-primary btn-sm">Uusi lasku</button>
+        
+        <p id="lasku" class="p"></p>
+
+        <form>
+            <input id="vastaus" type="number" style="width: 150px;" class="form-control">
+        </form>
+        
+        <br>
+
+        <button type="button" class="btn btn-primary" onclick="naytaVastaus()">Näytä vastaus</button>
+        
+        <p id="Onko"></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
