@@ -10,6 +10,18 @@
     <title>Peruslaskuja</title>
 </head>
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('peruslaskuja') }}">Peruslaskuja</a></li>
+                <li><a href="{{ url_for('Pluslaskuja') }}">Pluslaskuja(+)</a></li>
+                <li><a href="{{ url_for('Miinuslaskuja') }}">Miinuslaskuja(-)</a></li>
+                <li><a href="{{ url_for('Kertolaskuja') }}">Kertolaskuja(*)</a></li>
+                <li><a href="{{ url_for('Jakolaskuja') }}">Jakolaskuja(/)</a></li>
+            </ul>
+        </div>
+    </nav>
+        
     <div class="container">
         <h3 class="h3">plus-, miinus-, jako- ja kertolaskuja</h3>
         
