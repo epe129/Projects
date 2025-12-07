@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
-    <title>Matikka pelit</title>
-
+    <title>Peruslaskuja</title>
 </head>
-<body class="bg-light">
-
-    <div class="container py-5 text-center">
-        <h1 class="mb-4">Tervetuloa matikka peleihin</h1>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('index') }}">Peruslaskuja</a></li>
+                <li><a href="{{ url_for('Pluslaskuja') }}">Pluslaskuja(+)</a></li>
+                <li><a href="{{ url_for('Miinuslaskuja') }}">Miinuslaskuja(-)</a></li>
+                <li><a href="{{ url_for('Kertolaskuja') }}">Kertolaskuja(*)</a></li>
+                <li><a href="{{ url_for('Jakolaskuja') }}">Jakolaskuja(/)</a></li>
+            </ul>
+        </div>
+    </nav>
         
-        <a href="{{ url_for('peruslaskuja') }}" target="_blank" class="text-decoration-none">
-            <div class="card shadow-sm mx-auto" style="max-width: 300px;">
-                <div class="card-body">
-                    <h3 class="card-title">Peruslaskuja</h3>
-                </div>
-            </div>
-        </a>
+    <div class="container">
+        <h3 class="h3">plus-, miinus-, jako- ja kertolaskuja</h3>
+        
+        <button onclick="location.reload();" class="btn btn-primary btn-sm">Uusi lasku</button>
+        
+        <p id="lasku" class="p"></p>
 
+        <form>
+            <input id="vastaus" type="number" style="width: 150px;" class="form-control">
+        </form>
+        
         <br>
 
+        <button type="button" class="btn btn-primary" onclick="naytaVastaus()">Näytä vastaus</button>
+        
+        <p id="Onko"></p>
     </div>
 
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

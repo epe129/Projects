@@ -13,7 +13,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('peruslaskuja') }}">Peruslaskuja</a></li>
+                <li><a href="{{ url_for('index') }}">Peruslaskuja</a></li>
                 <li><a href="{{ url_for('Pluslaskuja') }}">Pluslaskuja(+)</a></li>
                 <li><a href="{{ url_for('Miinuslaskuja') }}">Miinuslaskuja(-)</a></li>
                 <li><a href="{{ url_for('Kertolaskuja') }}">Kertolaskuja(*)</a></li>
@@ -60,9 +60,6 @@
         let v = document.getElementById("vastaus");
         let n = document.getElementById("Onko");
             
-
-        let etsiKertomerkki;
-        let etsiJakomerkki;
         let merkkiIndex;
         let tulos = 0;
 
@@ -70,78 +67,22 @@
             let inputShow = v.value
 
             for (let i = 0; i < vastaus.length; i++) {    
-                
-                etsiJakomerkki = vastaus.includes("/")        
-                etsiKertomerkki = vastaus.includes("*")
-            
-                if (etsiJakomerkki == true || etsiKertomerkki == true) {
-                    switch(vastaus[i]) {
-                        case "/":
-                            merkkiIndex = vastaus.indexOf("/")
-
-                            tulos = vastaus[merkkiIndex-1] / vastaus[merkkiIndex+1];
-                            
-                            console.log(vastaus[merkkiIndex-1] , vastaus[merkkiIndex+1])
-                            
-                            vastaus.splice(merkkiIndex-1, merkkiIndex+2, tulos);
+                switch(vastaus[i]) {
+                    case "*":
+                        merkkiIndex = vastaus.indexOf("*")
                                 
-                            console.log(vastaus)
-
-                            i = 0;
-                            tulos = 0
-                            merkkiIndex = 0
-
-                            etsiJakomerkki = vastaus.includes("/")
-
-                            break;       
-                        case "*":
-                            merkkiIndex = vastaus.indexOf("*")
+                        tulos = vastaus[merkkiIndex-1] * vastaus[merkkiIndex+1];
                                 
-                            tulos = vastaus[merkkiIndex-1] * vastaus[merkkiIndex+1];
+                        vastaus.splice(merkkiIndex-1, merkkiIndex+2, tulos);
                                 
-                            vastaus.splice(merkkiIndex-1, merkkiIndex+2, tulos);
+                        console.log(vastaus)
                                 
-                            console.log(vastaus)
-                                
-                            i = 0;
-                            tulos = 0
-                            merkkiIndex = 0
-                            etsiKertomerkki = vastaus.includes("*")
+                        i = 0;
+                        tulos = 0
+                        merkkiIndex = 0
 
-                            break;
-                        }
-                    } else {
-                        switch(vastaus[i]) {
-                            case "+":
-                                merkkiIndex = vastaus.indexOf("+")
-                                    
-                                tulos = vastaus[merkkiIndex-1] + vastaus[merkkiIndex+1];
-                                    
-                                vastaus.splice(merkkiIndex-1, merkkiIndex+2, tulos);
-                                    
-                                console.log(vastaus)
-                                    
-                                i--;
-                                tulos = 0
-                                merkkiIndex = 0
-                                    
-                                break;
-                            case "-":
-                                merkkiIndex = vastaus.indexOf("-")
-                                    
-                                tulos = vastaus[merkkiIndex-1] - vastaus[merkkiIndex+1];
-                                    
-                                vastaus.splice(merkkiIndex-1, merkkiIndex+2, tulos);
-                                    
-                                console.log(vastaus)
-                                    
-                                i--;
-                                tulos = 0
-                                merkkiIndex = 0
-                                    
-                                break;
-                            }
-                        }
+                        break;
+                }
             }
 
             if (parseFloat(inputShow) == parseFloat(vastaus[0])) {
