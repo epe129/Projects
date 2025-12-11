@@ -53,12 +53,18 @@
             color: white;
             text-align: center;
         }
+
+        span {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
     </style>
 </head>
 <body>
     <div>
         <h2>Log in</h2>
-        <form action="">
+        <form action="{{ url_for('login')}}" method="post">
             <label for="emailLabel">Username:</label>
             <br>
             <input type="text" id="username" placeholder="Enter username" name="username" style="width: 300px;" required>
@@ -75,6 +81,12 @@
 
             <button type="submit" id="submit">Submit</button>
         </form>
+    
+        <br>
+        <br>
+
+        <span>{{ NotExist }}</span>
+    
     </div>
 </body>
 </html>

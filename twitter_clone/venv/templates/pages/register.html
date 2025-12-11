@@ -53,6 +53,12 @@
             color: white;
             text-align: center;
         }
+
+        span {
+            color: white;
+            font-size: 1.5rem;
+        }
+
     </style>
 </head>
 <body>
@@ -79,6 +85,14 @@
 
             <button type="submit" id="submit">Submit</button>
         </form>
+        
+        <br>
+        <br>
+
+        <span>{{ empty }}</span>
+        <span>{{ PasswordMatch }}</span>
+        <span>{{ SameUsername }}</span>
+    
     </div>
 </body>
 </html>

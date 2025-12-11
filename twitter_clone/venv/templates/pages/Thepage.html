@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>page</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .main {
+            position: fixed;
+            top: -5px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            float: none;
+            background-color: black;
+            color: white;
+            width: 75%;
+            height: auto;
+            border: 1px solid rgb(158, 158, 158);
+        }
+
+        .tweets {
+            height: 100vh;
+        }
+
+        h1 {
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
+    <div class="main">
+        <h1>Hello, <span>{{ username }}</span></h1>
+    </div>
     
+    <div class="tweets">
+
+    </div>
 </body>
 </html>
