@@ -15,14 +15,25 @@ def index():
 
     return render_template("index.html")
 
-@app.route('/page')
+@app.route('/page', methods =["GET", "POST"])
 def page():
     username = ""
+
+    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/tweets.db')
+
+    c = conn.cursor()
 
     if not session.get("username"):
         return redirect("/login")
     else:
         username = session.get("username")
+    
+    if request.method == "POST":
+        tweet = request.form.get("tweet")
+        u = session.get("username")
+        PrivateOrPublic = request.form.getlist('checkbox')
+
+        print(tweet, u, PrivateOrPublic)
     
     return render_template("/pages/Thepage.html", username=username)
 

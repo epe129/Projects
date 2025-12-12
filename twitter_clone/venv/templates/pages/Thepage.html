@@ -18,27 +18,85 @@
             float: none;
             background-color: black;
             color: white;
-            width: 75%;
+            width: 42%;
+            height: auto;
+            border: 1px solid rgb(158, 158, 158);
+        }
+
+        .MakeTweet {
+            position: fixed;
+            top: 78px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            float: none;
+            background-color: black;
+            color: white;
+            width: 42%;
             height: auto;
             border: 1px solid rgb(158, 158, 158);
         }
 
         .tweets {
-            height: 100vh;
+            height: 100%;
         }
 
         h1 {
             padding-left: 20px;
         }
+
+        form {
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+        }
+
+        textarea {
+            left: 0;
+            right: 0;
+            float: none;
+            position: absolute;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+        }
+
+        button {
+            position: relative;
+            float: right;
+            padding: 5px;
+            margin: 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background-color: rgb(0, 145, 255);
+            border: none;
+            color: white;
+            border-radius: 5px;
+            left: 70px;
+            margin-top: 140px;
+        }
+
     </style>
 </head>
 <body>
     <div class="main">
         <h1>Hello, <span>{{ username }}</span></h1>
     </div>
-    
-    <div class="tweets">
 
+    <div class="MakeTweet">
+        <form action="{{ url_for('page')}}" method="post">
+            <textarea rows="5" cols="70" placeholder="Make your tweet ..." name="tweet"></textarea>
+            <div style="float: right; margin-top: 90px;">
+                <label>Public:</label><input type="checkbox" name="checkbox" id="check" value="Public">
+                <br>
+                <label>Private:</label><input type="checkbox" name="checkbox" id="check" value="Private">
+            </div>
+            <button>Tweet</button>
+        </form>
     </div>
+
+    <div class="tweets">
+    </div>
+
 </body>
 </html>
