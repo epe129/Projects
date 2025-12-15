@@ -18,6 +18,10 @@ def index():
 @app.route('/page', methods =["GET", "POST"])
 def page():
     username = ""
+    tweet = ""
+    user = ""
+    PrivateOrPublic = ""
+    data = []
 
     conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/tweets.db')
 
@@ -30,12 +34,42 @@ def page():
     
     if request.method == "POST":
         tweet = request.form.get("tweet")
-        u = session.get("username")
+        user = session.get("username")
         PrivateOrPublic = request.form.getlist('checkbox')
+        
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS tweets (
+                USERNAME TEXT NOT NULL,
+                STATUS TEXT NOT NULL,
+                TWEET TEXT NOT NULL
+            )
+        ''')
 
-        print(tweet, u, PrivateOrPublic)
+        c.execute(f"INSERT INTO tweets (USERNAME, STATUS, TWEET) VALUES ('{user}', '{PrivateOrPublic[0]}', '{tweet}')")
+
+        conn.commit()
+        
+        
+    tweet = ""
+    user = ""
+    PrivateOrPublic = ""
     
-    return render_template("/pages/Thepage.html", username=username)
+    c.execute("SELECT * FROM tweets")
+
+    rows = c.fetchall()
+
+    for c in rows:
+        if c[1] == "Private":
+            continue
+        elif c[1] == "Public":
+            data.append(c)
+    
+    print(data)
+
+    p = len(data)
+
+
+    return render_template("/pages/Thepage.html", username=username, data=data, p=p)
 
 
 @app.route('/login', methods =["GET", "POST"])
@@ -69,6 +103,7 @@ def register():
     username = ""
     password = ""
     passwordConfirm = ""
+
     SameUsername = "Username is taken"
     PasswordMatch = "Password not maching"
     empty = "Username or password field is empty"

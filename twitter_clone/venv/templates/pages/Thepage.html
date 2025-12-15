@@ -1,3 +1,4 @@
+<!-- needs some css work -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +11,12 @@
         }
 
         .main {
-            position: fixed;
-            top: -5px;
+            top: 0px;
+            position: sticky;
+            margin-bottom: 0px;
+        }
+
+        .header {
             left: 0;
             right: 0;
             margin: 0 auto;
@@ -19,13 +24,10 @@
             background-color: black;
             color: white;
             width: 42%;
-            height: auto;
             border: 1px solid rgb(158, 158, 158);
         }
 
         .MakeTweet {
-            position: fixed;
-            top: 78px;
             left: 0;
             right: 0;
             margin: 0 auto;
@@ -33,12 +35,38 @@
             background-color: black;
             color: white;
             width: 42%;
-            height: auto;
             border: 1px solid rgb(158, 158, 158);
         }
 
         .tweets {
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            float: none;
+            color: white;
+            width:42%;
             height: 100%;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+            border-bottom: 1px solid gray;
+        }
+
+        #tweetSpanUSER {
+            color: white;
+        }
+
+        #tweetSpanTEXT {
+            color: white;
+            margin-left: 10px;
+        }
+
+        #inside {
+            padding: 10px;
+            background-color: rgb(162, 162, 162);
+            width: 30%;
+            border-radius: 5px;
+            margin: 0 auto;
+            margin-top: 10px;
         }
 
         h1 {
@@ -55,10 +83,11 @@
             left: 0;
             right: 0;
             float: none;
-            position: absolute;
             background-color: black;
             color: white;
             border: 1px solid white;
+            width: 99%;
+            border: none;
         }
 
         button {
@@ -73,30 +102,38 @@
             color: white;
             border-radius: 5px;
             left: 70px;
-            margin-top: 140px;
+            margin-top: 45px;
         }
-
+    
     </style>
 </head>
 <body>
     <div class="main">
-        <h1>Hello, <span>{{ username }}</span></h1>
+        <div class="header">
+            <h1>Hello, <span>{{ username }}</span></h1>
+        </div>
+        <div class="MakeTweet">
+            <form action="{{ url_for('page')}}" method="post">
+                <textarea rows="5" cols="70" placeholder="Make your tweet ..." name="tweet"></textarea>
+                <div style="float: right;">
+                    <label>Public:</label><input type="checkbox" name="checkbox" id="check" value="Public">
+                    <br>
+                    <label>Private:</label><input type="checkbox" name="checkbox" id="check" value="Private">
+                </div>
+                <button>Tweet</button>
+            </form>
+        </div>
     </div>
-
-    <div class="MakeTweet">
-        <form action="{{ url_for('page')}}" method="post">
-            <textarea rows="5" cols="70" placeholder="Make your tweet ..." name="tweet"></textarea>
-            <div style="float: right; margin-top: 90px;">
-                <label>Public:</label><input type="checkbox" name="checkbox" id="check" value="Public">
-                <br>
-                <label>Private:</label><input type="checkbox" name="checkbox" id="check" value="Private">
-            </div>
-            <button>Tweet</button>
-        </form>
-    </div>
-
+    
     <div class="tweets">
+        {%for v in range(0, p)%}
+            <div id="inside">
+                <span id="tweetSpanUSER">{{ data[v][0] }}</span>
+                <hr>
+                <span id="tweetSpanTEXT">{{ data[v][2] }}</span>
+            </div>
+            <hr>
+        {%endfor%}
     </div>
-
 </body>
 </html>
