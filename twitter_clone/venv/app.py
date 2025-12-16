@@ -152,6 +152,14 @@ def register():
     
     return render_template("/pages/register.html")
 
+@app.route(f'/<username>', methods =["GET", "POST"])
+def profile(username):
+    username = session["username"]
+
+    return render_template('/pages/profile.html', username=username)
+    
+
+
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5001)
