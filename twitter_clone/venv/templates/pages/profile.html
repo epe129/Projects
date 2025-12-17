@@ -6,10 +6,74 @@
     <title>Profile</title>
     <style>
 
+        body {
+            background-color: black;
+        }
+    
+        .profile {
+            left: 0;
+            right: 0;
+            top: 0;
+            position: sticky;
+            margin: 0 auto;
+            margin-top: -25px;
+            float: none;
+            color: white;
+            width:42%;
+            height: 100px;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+            border-bottom: 1px solid gray;
+            background-color: black;
+            padding: 5px 0px 5px 0px;
+        }
+
+        .tweets {
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            float: none;
+            color: white;
+            width:42%;
+            height: 100%;
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+        }
+
+        #tweetSpanUSER {
+            color: white;
+        }
+
+        #tweetSpanTEXT {
+            color: white;
+            margin-left: 10px;
+        }
+
+        #inside {
+            padding: 10px;
+            background-color: rgb(44, 44, 44);
+            width: 30%;
+            border-radius: 5px;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
-    <div>
+    <div class="profile">
+        <h1 style="margin-left: 10px;">Hello, <span>{{ username }}</span></h1>
+    </div>
+    <br>
+    <div class="tweets">
+        {%for v in range(0, p)%}
+            <div id="inside">
+                <span id="tweetSpanUSER">{{ data[v][0] }}</span>
+                <hr>
+                <span id="tweetSpanTEXT">{{ data[v][2] }}</span>
+            </div>
+            <hr>
+        {%endfor%}
     </div>
 </body>
 </html>

@@ -64,7 +64,9 @@ def page():
         elif c[1] == "Public":
             data.append(c)
     
-    print(data)
+    # print(data)
+    
+    data.sort()
 
     p = len(data)
 
@@ -154,12 +156,28 @@ def register():
 
 @app.route(f'/<username>', methods =["GET", "POST"])
 def profile(username):
-    username = session["username"]
+    data = []
 
-    return render_template('/pages/profile.html', username=username)
+    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/tweets.db')
+
+    c = conn.cursor()
+        
+    c.execute("SELECT * FROM tweets")
+
+    rows = c.fetchall()
     
 
+    for c in rows:
+        if c[0] == username:
+            data.append(c)
 
+    data.sort()
+
+    p = len(data)
+
+
+    return render_template('/pages/profile.html', username=username, data=data, p=p)
+    
 
 if __name__ == '__main__':
     app.run(port=5001)
