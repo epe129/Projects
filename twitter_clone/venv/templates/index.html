@@ -6,64 +6,67 @@
     <title>Regiter or Sing in</title>
     <style>
         body {
-            background-color: black;
+            background: black;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #f5f6fa;
         }
 
         a {
-            color: white;
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #00acee;
         }
 
         .main {
             display: flex;
             flex-direction: row;
-            margin: 0 auto;
             justify-content: center;
             align-items: center;
             height: 50vh;
+            gap: 2rem;
         }
 
-        #Login {
-            margin-right: 10px;
-            background-color:dimgrey;
-            width: 50px;
-            padding: 15px;
-            border-radius: 5px;
-
+        .btn {
+            background: linear-gradient(90deg, #00acee 0%, #0077b6 100%);
+            color: #fff;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            outline: none;
         }
-
-        #Register {
-            margin-left: 10px;
-            background-color:dimgrey;
-            width: 50px;
-            padding: 15px;
-            border-radius: 5px;
+        .btn:hover {
+            background: linear-gradient(90deg, #0077b6 0%, #00acee 100%);
+            transform: translateY(-2px) scale(1.04);
         }
 
         #otsikko {
-            text-align: center; 
-            color: white; 
-            position: relative; 
-            left: 0; 
-            right: 0; 
-            top: 0;
-            bottom: 0;
-            font-size: 2rem;
-            margin-bottom: -20px;
+            text-align: center;
+            color: #fff;
+            font-size: 2.5rem;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
         }
 
     </style>
 </head>
 <body>
-    <h1 id="otsikko">Welcome, let see what happend today?</h1>
-    <br>
+    <h1 id="otsikko">Welcome, let's see what happened today?</h1>
     <div class="main">
-        <div id="Login">
-            <a href="login">Log in </a>
-        </div>
-        <br/>
-        <div id="Register">
-            <a href="register">Register</a>
-        </div>
+        <a href="login" class="btn">Log in</a>
+        <a href="register" class="btn">Register</a>
     </div>
 </body>
 </html>

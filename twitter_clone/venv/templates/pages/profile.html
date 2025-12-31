@@ -7,62 +7,82 @@
     <style>
 
         body {
-            background-color: black;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #f5f6fa;
         }
-    
+
         .profile {
-            left: 0;
-            right: 0;
-            top: 0;
-            position: sticky;
             margin: 0 auto;
-            margin-top: -25px;
-            float: none;
-            color: white;
-            width:42%;
-            height: 100px;
-            border-left: 1px solid gray;
-            border-right: 1px solid gray;
-            border-bottom: 1px solid gray;
-            background-color: black;
-            padding: 5px 0px 5px 0px;
+            background: rgba(34, 40, 49, 0.98);
+            color: #fff;
+            width: 100%;
+            max-width: 540px;
+            min-width: 320px;
+            border: 1.5px solid #00acee;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+            position: sticky;
+            top: 0;
+            padding: 1.5rem 0 1.2rem 0;
         }
 
         .tweets {
-            left: 0;
-            right: 0;
             margin: 0 auto;
-            float: none;
-            color: white;
-            width:42%;
-            height: 100%;
-            border-left: 1px solid gray;
-            border-right: 1px solid gray;
+            color: #fff;
+            width: 100%;
+            max-width: 540px;
+            min-width: 320px;
+            border-left: 1.5px solid #00acee;
+            border-right: 1.5px solid #00acee;
+            padding-bottom: 2rem;
         }
 
         #tweetSpanUSER {
-            color: white;
+            color: #00acee;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         #tweetSpanTEXT {
-            color: white;
+            color: #f5f6fa;
             margin-left: 10px;
+            font-size: 1.05rem;
         }
 
         #inside {
-            padding: 10px;
-            background-color: rgb(44, 44, 44);
-            width: 30%;
-            border-radius: 5px;
+            padding: 16px 18px;
+            background: rgba(44, 62, 80, 0.92);
+            width: 90%;
+            border-radius: 10px;
             margin: 0 auto;
-            margin-top: 10px;
+            margin-top: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+
+        h1 {
+            padding-left: 20px;
+            font-size: 2rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            margin-left: 10px;
+        }
+
+        a {
+            color: white;
+            font-size: 1rem;
+            margin-left: 31px;
+            text-decoration: none;
         }
 
     </style>
 </head>
 <body>
     <div class="profile">
-        <h1 style="margin-left: 10px;">Hello, <span>{{ username }}</span></h1>
+        <h1>Hello, <span>{{ username }}</span></h1>
+        <a href="{{ url_for('page')}}">Page</a>
     </div>
     <br>
     <div class="tweets">

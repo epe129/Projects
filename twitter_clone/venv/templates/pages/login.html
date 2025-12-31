@@ -7,86 +7,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
-            background-color: black;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #f5f6fa;
         }
 
-        div {
+        .login-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 0 auto;
-            padding: 10px; 
-            height: 50vh;
+            min-height: 80vh;
         }
 
         form {
-            height: 200px;
-        }
-
-        #submit {
-            background-color: rgb(0, 187, 255);
-            border-radius: 5px;
-            border: none;
-            font-size: 1.3rem;
-            padding: 5px;
-            cursor: pointer;
-            color: white;
-        }
-
-        #submit:hover {
-            background-color: rgb(0, 153, 255);
-        }
-
-        input {
-            margin-top: 5px;
-            padding: 5px;
+            background: rgba(34, 40, 49, 0.95);
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            min-width: 340px;
         }
 
         label {
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 12px 14px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: #232526;
+            color: #f5f6fa;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border: 1.5px solid #00acee;
+        }
+
+        #submit {
+            background: linear-gradient(90deg, #00acee 0%, #0077b6 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 0;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: background 0.2s, transform 0.2s;
+        }
+        #submit:hover {
+            background: linear-gradient(90deg, #0077b6 0%, #00acee 100%);
+            transform: translateY(-2px) scale(1.03);
         }
 
         h2 {
-            color: white;
+            color: #fff;
             text-align: center;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
         }
 
         span {
-            color: white;
-            font-size: 1.5rem;
+            color: #ffbaba;
+            font-size: 1.1rem;
+            margin-top: 1.2rem;
         }
-        
     </style>
 </head>
 <body>
-    <div>
+    <div class="login-container">
         <h2>Log in</h2>
         <form action="{{ url_for('login')}}" method="post">
-            <label for="emailLabel">Username:</label>
-            <br>
-            <input type="text" id="username" placeholder="Enter username" name="username" style="width: 300px;" required>
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username" name="username" required>
 
-            <br>
-            <br>
-
-            <label for="pwdLabel">Password:</label>
-            <br>
-            <input type="password" id="pwd" placeholder="Enter password" name="pwd" style="width: 300px;" required>
-
-            <br>
-            <br>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" placeholder="Enter password" name="pwd" required>
 
             <button type="submit" id="submit">Submit</button>
         </form>
-    
-        <br>
-        <br>
-
         <span>{{ NotExist }}</span>
-    
     </div>
 </body>
 </html>
