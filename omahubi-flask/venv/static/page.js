@@ -63,7 +63,7 @@ function mode() {
         document.getElementById("body").style.color = "white";
 
     } else {
-        document.getElementById("body").style.backgroundColor = "white";
+        document.getElementById("body").style.backgroundColor = "#F5E9DA";
         document.getElementById("body").style.color = "black";
         t = 0
     }

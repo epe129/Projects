@@ -20,7 +20,6 @@ Session(app)
 class Register(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
     Password = PasswordField('Password', validators=[DataRequired()])
-    id = StringField('id', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 @app.route('/', methods =["GET", "POST"])
@@ -36,8 +35,7 @@ def home():
         if form.validate_on_submit():
             Username = form.Username.data.lower()
             Password = form.Password.data
-            id = form.id.data
-            session["id"] = id
+            session["Username"] = Username
         else:
             return "Error!"
 
@@ -48,7 +46,6 @@ def home():
         pass
     else:
         tunnus = {
-            "id": f"{id}",
             "Username": f"{Username}",
             "Password": f"{hashed_password}",
         }
@@ -57,8 +54,8 @@ def home():
             file_data = json.load(f)
             for key, value in file_data.items():
                 for arvo in value:
-                    # if username or id is taken fails
-                    if Username == arvo["Username"] or id == arvo["id"]:
+                    # if username is taken fails
+                    if Username == arvo["Username"]:
                         tunnus.clear()
                         Username = ""
                         Password = ""
@@ -73,8 +70,7 @@ def home():
                     
                 json.dump(file_data, f, indent=4)
                 
-                return redirect(url_for('page', Username=Username, id=id))
-    is_runnig()
+                return redirect(url_for('page', Username=Username))
 
     return render_template("create.html", taken=taken, form=form)
 
@@ -82,7 +78,6 @@ def home():
 class SigninClass(FlaskForm):
     Username  = StringField('Username', validators=[DataRequired()])
     Password2 = PasswordField('Password', validators=[DataRequired()])
-    id2 = StringField('id', validators=[DataRequired()])
     submit2 = SubmitField('Submit')
 
 @app.route('/Signin', methods =["GET", "POST"])
@@ -92,14 +87,13 @@ def Signin():
     wrong = ""
     Username = ""
     Password2 = ""
-    id = ""
 
     if request.method == "POST":
         if form2.validate_on_submit():
             Username = form2.Username.data.lower()
             Password2 = form2.Password2.data
-            id = form2.id2.data
-            session["id"] = id
+
+            session["Username"] = Username
             # retrieves user data from json
             with open("json.json", "r") as tiedosto:
                 data = tiedosto.read()
@@ -107,14 +101,13 @@ def Signin():
                 for key, value in tiedot.items():
                     for d in value:
                         if d["Username"] == Username:
-                            getid = d["id"]
                             getusername = d["Username"]
                             getpassword = d["Password"]
                             
                             is_valid = bcrypt.check_password_hash(getpassword, Password2)
                             #  check that password, id and username is right
-                            if str(id) in getid and Username in getusername and is_valid == True:                
-                                return redirect(url_for('page', Username=Username, id=id))
+                            if Username in getusername and is_valid == True:                
+                                return redirect(url_for('page', Username=Username))
                             else:
                                 wrong = "Username, Password or id is wrong!"
 
@@ -123,7 +116,6 @@ def Signin():
                             id = ""
         else:
             return "Error!"
-    is_runnig()
 
     return render_template("Signin.html", wrong=wrong, form2=form2)
 
@@ -131,7 +123,6 @@ def Signin():
 class adminlogin(FlaskForm):
     name  = StringField('name', validators=[DataRequired()])
     password  = PasswordField('password', validators=[DataRequired()])
-    id = StringField('id', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 @app.route('/adminLogin', methods =["GET", "POST"])
@@ -139,14 +130,12 @@ def adminLogin():
     form = adminlogin()
     username = ""
     password = ""
-    id = ""
 
     if request.method == "POST":
         if form.validate_on_submit():
             username = form.name.data
             password = form.password.data
-            id = form.id.data          
-            session["id"] = id
+            session["Username"] = username
             with open("admin.json", "r") as tiedosto:
                 data = tiedosto.read()
                 tiedot = json.loads(data)
@@ -157,14 +146,13 @@ def adminLogin():
                             getpassword = d["Password"]
                             
                             if getusername == username and getpassword == password:                 
-                                return redirect(url_for('adminPage', username=username, id=id))
+                                return redirect(url_for('adminPage', username=username))
                             else:
                                 pass
                             username = ""
                             password = ""
         else:
             return "Error!"
-    is_runnig()
 
     return render_template("adminLogin.html", form=form)
 
@@ -173,13 +161,13 @@ class adiminP(FlaskForm):
     submit3 = SubmitField('Submit')
 
 # admin can delete user and see all users
-@app.route('/adminPage/<username>/<id>', methods =["GET", "POST"])
-def adminPage(username, id):
+@app.route('/adminPage/<username>', methods =["GET", "POST"])
+def adminPage(username):
     form = adiminP()
 
     kayttajat = []
     print(username)
-    if not session.get("id"):
+    if not session.get("Username"):
         return redirect("/adminLogin")
     
     with open("json.json", "r") as tiedosto:
@@ -188,47 +176,8 @@ def adminPage(username, id):
         for key, value in tiedot.items():
             for d in value:
                 kayttajat.append(d)
-    is_runnig()
 
-    if request.method == "POST":
-        if form.validate_on_submit():
-            poista_id = form.poista.data
-            updated_data = {}
-            updated_data2 = {
-                "tiedot": [
-
-                ]
-            }
-            
-            if poista_id == "":
-                pass
-            else:
-                with open("json.json", "r+") as tiedosto:
-                    data = tiedosto.read()
-                    tiedot = json.loads(data)
-                    for key, value in tiedot.items():
-                        for d in value:
-                            if d["id"] == poista_id:
-                                d.pop("id")
-                                d.pop("Username")
-                                d.pop("Password")
-                            else:
-                                updated_data.update({key : value})
-                
-                for c , s in updated_data.items():
-                    for w in s:
-                        if bool(w) == False:
-                            continue
-                        else:
-                            updated_data2["tiedot"].append(w)
-                                
-                with open('json.json', 'w') as file:
-                    json.dump(updated_data2,file,indent=2)
-        else:
-            return "Error!"
-
-
-    return render_template("admin.html", kayttajat=kayttajat, form=form, username=username, id=id)
+    return render_template("admin.html", kayttajat=kayttajat, form=form, username=username)
 
 
 # page
@@ -237,10 +186,10 @@ class blog(FlaskForm):
     text  = TextAreaField('text', render_kw={'rows': 10, 'cols': 50}, validators=[DataRequired()])
     submit3 = SubmitField('Submit')
 
-@app.route('/page/<Username>/<id>', methods =["GET", "POST"])
-def page(Username, id):
-    blogs(Username, id)
-    if not session.get("id"):
+@app.route('/page/<Username>', methods =["GET", "POST"])
+def page(Username):
+    blogs(Username)
+    if not session.get("Username"):
         return redirect("/Signin")
 
     form = blog()
@@ -258,8 +207,8 @@ def page(Username, id):
         pass
     else:        
         Write_blog = {
+            "username": f"{Username}",
             "title": f"{title}",
-            "id": f"{id}", 
             "text": f"{text}"
         }
         # appends blog in json file
@@ -267,7 +216,7 @@ def page(Username, id):
             file_data = json.load(f)
             for key, value in file_data.items():
                 for a in value:
-                    if a["id"] == id and a["title"] == title:
+                    if a["Username"] == Username and a["title"] == title:
                         title = ""
                         text = ""
             
@@ -279,9 +228,8 @@ def page(Username, id):
                 f.seek(0)
                             
                 json.dump(file_data, f, indent=4)              
-    is_runnig()
 
-    return render_template('page.html', Username=Username, id=id, form=form)
+    return render_template('page.html', Username=Username, form=form)
 
 @app.route("/logout")
 def logout():
@@ -294,8 +242,8 @@ class poistablog(FlaskForm):
     blogin_title  = StringField('blogin_title', validators=[DataRequired()])
     submit = SubmitField('submit')
 
-@app.route("/blogs/<Username>/<id>", methods =["GET", "POST"])
-def blogs(Username, id):
+@app.route("/blogs/<Username>", methods =["GET", "POST"])
+def blogs(Username):
     HerBlogs = []
     poista = ""
     form = poistablog()
@@ -319,7 +267,6 @@ def blogs(Username, id):
                         for d in value:
                             if d["title"] == poista:
                                 d.pop("title")
-                                d.pop("id")
                                 d.pop("text")
                             else:                  
                                 updated_data.update({key : value})
@@ -341,24 +288,12 @@ def blogs(Username, id):
         file_data = json.load(f)
         for key, value in file_data.items():
             for result in value:
-                if result["id"] == str(id):
+                if result["username"] == str(Username):
                     HerBlogs.append(result)
                 else:
                     continue
-    is_runnig()
 
-    return render_template("blogs.html", Username=Username, id=id, result=HerBlogs, p=len(HerBlogs), form=form)
-
-@app.route('/is_running', methods =["GET", "POST"])
-def is_runnig():
-    root_url = request.url_root
-    developer_url = 'http://127.0.0.1:5000/'
-    if root_url != developer_url:    
-        session.clear()
-    else:
-        print("oikea")
-
-    return root_url
+    return render_template("blogs.html", Username=Username, result=HerBlogs, p=len(HerBlogs), form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
