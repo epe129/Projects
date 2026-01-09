@@ -16,6 +16,8 @@ def index():
 @app.route('/page', methods =["GET", "POST"])
 def page():
 
+    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/db.db')
+
     if not session.get("username"):
         return redirect("/login")
     
@@ -25,23 +27,21 @@ def page():
     PrivateOrPublic = ""
     data = []
 
-    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/tweets.db')
-
     c = conn.cursor()
 
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS tweets (
+            USERNAME TEXT NOT NULL,
+            STATUS TEXT NOT NULL,
+            TWEET TEXT NOT NULL
+        )
+    ''')
     
     if request.method == "POST":
         tweet = request.form.get("tweet")
         user = session.get("username")
         PrivateOrPublic = request.form.getlist('checkbox')
         
-        c.execute('''
-            CREATE TABLE IF NOT EXISTS tweets (
-                USERNAME TEXT NOT NULL,
-                STATUS TEXT NOT NULL,
-                TWEET TEXT NOT NULL
-            )
-        ''')
 
         c.execute(f"INSERT INTO tweets (USERNAME, STATUS, TWEET) VALUES ('{user}', '{PrivateOrPublic[0]}', '{tweet}')")
 
@@ -70,8 +70,8 @@ def page():
 
 @app.route('/login', methods =["GET", "POST"])
 def login():
-
-    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/users.db')
+    
+    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/db.db')
 
     c = conn.cursor()
        
@@ -106,9 +106,9 @@ def login():
 def register():
     SameUsername = "Username is taken"
     empty = "Username or password field is empty"
-        
-    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/users.db')
-
+    
+    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/db.db')
+    
     c = conn.cursor()
 
     if request.method == "POST":
@@ -148,12 +148,12 @@ def register():
 @app.route(f'/<username>', methods =["GET", "POST"])
 def profile(username):
     data = []
+    
+    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/db.db')
 
     if not session.get("username"):
         return redirect("/login")
     
-    conn = sqlite3.connect('/home/lenni/home/koodit/projects/twitter_clone/venv/db/tweets.db')
-
     c = conn.cursor()
         
     c.execute("SELECT * FROM tweets")

@@ -151,6 +151,7 @@
 </head>
 <body>    
     <div class="main">
+        
         <div class="header">
             <h1>Hello, <span>{{ username }}</span></h1>
             <div id="inhead">
@@ -158,6 +159,7 @@
                 <a id="logout" href="{{ url_for('logout')}}">logout</a>
             </div>        
         </div>
+        
         <div class="MakeTweet">
             <form action="{{ url_for('page')}}" method="post">
                 <textarea rows="5" cols="70" placeholder="Make your tweet ..." name="tweet"></textarea>
@@ -168,6 +170,7 @@
                 <button>Tweet</button>
             </form>
         </div>
+    
     </div>
 
     <div class="tweets">
@@ -180,5 +183,6 @@
             <hr>
         {%endfor%}
     </div>
+    
 </body>
 </html>

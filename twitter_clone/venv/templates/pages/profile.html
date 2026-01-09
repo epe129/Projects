@@ -77,14 +77,79 @@
             text-decoration: none;
         }
 
+        .MakeTweet {
+            margin: 0 auto;
+            background: rgba(34, 40, 49, 0.98);
+            color: #fff;
+            max-width: 540px;
+            min-width: 320px;
+            border: 1.5px solid #00acee;
+            border-top: none;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+            height: 13rem;
+        }
+
+        .tweet-options {
+            margin-left: 10px;
+            margin-bottom: -25px;
+        }
+
+        textarea {
+            background: #232526;
+            color: #f5f6fa;
+            border: 1.5px solid #00acee;
+            width: 95%;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1.1rem;
+            resize: vertical;
+            margin-bottom: 0.8rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        button {
+            align-self: flex-end;
+            padding: 10px 32px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: linear-gradient(90deg, #00acee 0%, #0077b6 100%);
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            margin-right: 10px;
+        }
+        
+        form {
+            margin: 0 auto;
+            padding: 0.8rem 0 1.2rem 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
     </style>
 </head>
 <body>
+    
     <div class="profile">
         <h1>Hello, <span>{{ username }}</span></h1>
         <a href="{{ url_for('page')}}">Page</a>
     </div>
-    <br>
+    
+    <div class="MakeTweet">
+        <form action="{{ url_for('page')}}" method="post">
+            <textarea rows="5" cols="70" placeholder="Make your tweet ..." name="tweet"></textarea>
+            <div class="tweet-options">
+                <label for="public">Public:</label><input type="checkbox" name="checkbox" id="public" value="Public">
+                <label for="private">Private:</label><input type="checkbox" name="checkbox" id="private" value="Private">
+            </div>
+            <button>Tweet</button>
+        </form>
+    </div>    
+    
     <div class="tweets">
         {%for v in range(0, p)%}
             <div id="inside">
@@ -95,5 +160,6 @@
             <hr>
         {%endfor%}
     </div>
+
 </body>
 </html>
